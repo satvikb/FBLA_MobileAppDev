@@ -1,0 +1,22 @@
+{
+    "topicId": 1,
+    "topicName": "FBLA History",
+    "questions":[
+        {
+            "questionDifficulty": 4,
+            "question":"When was FBLA Founded?",
+            "imageURL":"",
+            "choiceType":"NUM",
+            "choices":{},
+            "correctAnswer":"1940"
+        },
+        {
+            "questionDifficulty": 3,
+            "question":"Who founded FBLA?",
+            "imageURL":"",
+            "choiceType":"TXT",
+            "choices":{},
+            "correctAnswer":"Forkner"
+        }
+    ]
+}
