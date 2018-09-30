@@ -42,9 +42,13 @@ class Button : UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(touchDown){
-            pressed();
+            buttonPressed();
             touchDown = false;
         }
+    }
+    
+    func buttonPressed(){
+        pressed();
     }
     
     

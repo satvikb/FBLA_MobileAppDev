@@ -23,8 +23,22 @@ struct Topic : Codable{
 struct Question : Codable{
     var questionDifficulty : Int
     var question : String
+    var questionId : String
     var imageURL : String
     var choiceType : String
     var choices : [String:String]
     var correctAnswer : String
+}
+
+struct TopicInfo {
+    var topicId : Int
+    var topicName : String
+    var topicQuestions : Int
+    var questionsComplete : Int
+}
+
+struct QuestionChoice {
+//    var choiceName : String // A, B, C, D, G, E, J, etc.
+    var choiceValue : String
+    var correctAnswer : Bool
 }

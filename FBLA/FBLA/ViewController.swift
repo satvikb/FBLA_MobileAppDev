@@ -19,8 +19,9 @@ enum ViewType{
 }
 
 var transitionTime : CGFloat = 0.5
+var allData : AllData!
 
-class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate {
+class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, QuestionHandlerDelegate {
 
     
 
@@ -28,25 +29,28 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate {
     
     var menuView : MenuView!
     var playTSV : PlayTSV!
+    var questionHandler : QuestionHandler!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        allData = DataHandler.readData()
+
         currentView = .Splash
         
         menuView = MenuView(frame: self.view.frame)
         menuView.delegate = self
         
         playTSV = PlayTSV(frame: self.view.frame)
+        playTSV.delegate = self
+        
+        questionHandler = QuestionHandler(frame: self.view.frame)
+        questionHandler.delegate = self
         
         switchBetweenViews(to: .Menu)
         print("SDF")
         
        
-        
-       LoadData.readData()
-        
     }
     
     func switchBetweenViews(to: ViewType) {
@@ -57,13 +61,18 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate {
                 self.menuView.removeFromSuperview()
 
             })
-            return
+            break
         case .PlayTSV:
             playTSV.animateOut(completion: {
                 print("play tsv animate out done")
                 self.playTSV.removeFromSuperview()
             })
-            return
+            break
+        case .QuestionHandler:
+            questionHandler.animateOut(completion: {
+                self.questionHandler.removeFromSuperview()
+            })
+            break;
         default: break
             
         }
@@ -80,6 +89,13 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate {
             playTSV.animateIn(completion: {
                 print("play tsv animate in done")
             })
+            break;
+        case .QuestionHandler:
+            self.view.addSubview(questionHandler)
+            questionHandler.animateIn(completion: {
+                print("question handler animate in")
+            })
+            break;
         default:
             break;
         }
@@ -90,8 +106,11 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate {
         switchBetweenViews(to: .PlayTSV)
     }
 
-    func playTSVPlayButtonPressed() {
-        switchBetweenViews(to: .Question)
+    func playTSVPlayButtonPressed(selectedTopics: [Topic]) {
+        questionHandler.topicSet = selectedTopics
+        questionHandler.createQuestionView()
+        
+        switchBetweenViews(to: .QuestionHandler)
     }
 }
 

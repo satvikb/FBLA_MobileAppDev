@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		402717D4215EC94800C886F8 /* TopicScrollViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717D3215EC94800C886F8 /* TopicScrollViewCell.swift */; };
+		402717D6215EC98F00C886F8 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717D5215EC98F00C886F8 /* RadioButton.swift */; };
+		402717D9215EDADA00C886F8 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 402717D7215EDADA00C886F8 /* SF-Pro-Text-Light.otf */; };
+		402717DA215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 402717D8215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf */; };
+		402717DC215EE01B00C886F8 /* QuestionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717DB215EE01B00C886F8 /* QuestionHandler.swift */; };
+		402717DE215EE95B00C886F8 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717DD215EE95B00C886F8 /* QuestionView.swift */; };
+		402717E1215EEDB300C886F8 /* 203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 402717E0215EEDB300C886F8 /* 203.jpg */; };
+		402717E4215EF2B900C886F8 /* QuestionChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717E3215EF2B900C886F8 /* QuestionChoiceView.swift */; };
+		402717E6216071FE00C886F8 /* QuestionFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717E5216071FE00C886F8 /* QuestionFinishedView.swift */; };
 		402AAFD4215DBA8000BF8815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFD3215DBA8000BF8815 /* AppDelegate.swift */; };
 		402AAFD6215DBA8000BF8815 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFD5215DBA8000BF8815 /* ViewController.swift */; };
 		402AAFD9215DBA8000BF8815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 402AAFD7215DBA8000BF8815 /* Main.storyboard */; };
@@ -21,11 +30,20 @@
 		402AAFF6215DC1E900BF8815 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFF5215DC1E900BF8815 /* Label.swift */; };
 		402AAFF8215DD10900BF8815 /* TopicScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFF7215DD10900BF8815 /* TopicScrollView.swift */; };
 		402AAFFD215DD19A00BF8815 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFFC215DD19A00BF8815 /* DataStructures.swift */; };
-		40CC09FE215DD7D800AC9A38 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC09FD215DD7D800AC9A38 /* LoadData.swift */; };
+		40CC09FE215DD7D800AC9A38 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC09FD215DD7D800AC9A38 /* DataHandler.swift */; };
 		40CC0A02215DD84200AC9A38 /* Topic2History.json in Resources */ = {isa = PBXBuildFile; fileRef = 40CC0A01215DD84200AC9A38 /* Topic2History.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		402717D3215EC94800C886F8 /* TopicScrollViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicScrollViewCell.swift; sourceTree = "<group>"; };
+		402717D5215EC98F00C886F8 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		402717D7215EDADA00C886F8 /* SF-Pro-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
+		402717D8215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Heavy.otf"; sourceTree = "<group>"; };
+		402717DB215EE01B00C886F8 /* QuestionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionHandler.swift; sourceTree = "<group>"; };
+		402717DD215EE95B00C886F8 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		402717E0215EEDB300C886F8 /* 203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 203.jpg; sourceTree = "<group>"; };
+		402717E3215EF2B900C886F8 /* QuestionChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionChoiceView.swift; sourceTree = "<group>"; };
+		402717E5216071FE00C886F8 /* QuestionFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFinishedView.swift; sourceTree = "<group>"; };
 		402AAFD0215DBA7F00BF8815 /* FBLA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBLA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402AAFD3215DBA8000BF8815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		402AAFD5215DBA8000BF8815 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,7 +60,7 @@
 		402AAFF5215DC1E900BF8815 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		402AAFF7215DD10900BF8815 /* TopicScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicScrollView.swift; sourceTree = "<group>"; };
 		402AAFFC215DD19A00BF8815 /* DataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructures.swift; sourceTree = "<group>"; };
-		40CC09FD215DD7D800AC9A38 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
+		40CC09FD215DD7D800AC9A38 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		40CC0A01215DD84200AC9A38 /* Topic2History.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Topic2History.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +75,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		402717D2215EC93200C886F8 /* TopicScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				402AAFF7215DD10900BF8815 /* TopicScrollView.swift */,
+				402717D3215EC94800C886F8 /* TopicScrollViewCell.swift */,
+			);
+			path = TopicScrollView;
+			sourceTree = "<group>";
+		};
+		402717DF215EED2500C886F8 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				402717E0215EEDB300C886F8 /* 203.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		402717E2215EF2A600C886F8 /* QuestionView */ = {
+			isa = PBXGroup;
+			children = (
+				402717DD215EE95B00C886F8 /* QuestionView.swift */,
+				402717E3215EF2B900C886F8 /* QuestionChoiceView.swift */,
+				402717E5216071FE00C886F8 /* QuestionFinishedView.swift */,
+			);
+			path = QuestionView;
+			sourceTree = "<group>";
+		};
 		402AAFC7215DBA7F00BF8815 = {
 			isa = PBXGroup;
 			children = (
@@ -78,12 +123,13 @@
 			children = (
 				402AAFD3215DBA8000BF8815 /* AppDelegate.swift */,
 				402AAFFB215DD12500BF8815 /* Core */,
-				402AAFE8215DBE5F00BF8815 /* Views */,
-				402AAFF3215DC03F00BF8815 /* UI */,
 				402AAFD5215DBA8000BF8815 /* ViewController.swift */,
 				402AAFEF215DBFD900BF8815 /* ScreenScaler.swift */,
+				402AAFE8215DBE5F00BF8815 /* Views */,
+				402AAFF3215DC03F00BF8815 /* UI */,
 				402AAFF4215DC05100BF8815 /* Supporting Files */,
 				402AAFE5215DBE1700BF8815 /* Questions */,
+				402717DF215EED2500C886F8 /* Images */,
 			);
 			path = FBLA;
 			sourceTree = "<group>";
@@ -100,10 +146,12 @@
 		402AAFE8215DBE5F00BF8815 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				402717E2215EF2A600C886F8 /* QuestionView */,
+				402717D2215EC93200C886F8 /* TopicScrollView */,
 				402AAFED215DBEFA00BF8815 /* View.swift */,
 				402AAFEB215DBEE500BF8815 /* MenuView.swift */,
 				402AAFE9215DBED700BF8815 /* PlayTSV.swift */,
-				402AAFF7215DD10900BF8815 /* TopicScrollView.swift */,
+				402717DB215EE01B00C886F8 /* QuestionHandler.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +161,7 @@
 			children = (
 				402AAFF1215DC03B00BF8815 /* Button.swift */,
 				402AAFF5215DC1E900BF8815 /* Label.swift */,
+				402717D5215EC98F00C886F8 /* RadioButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -120,6 +169,8 @@
 		402AAFF4215DC05100BF8815 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				402717D8215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf */,
+				402717D7215EDADA00C886F8 /* SF-Pro-Text-Light.otf */,
 				402AAFD7215DBA8000BF8815 /* Main.storyboard */,
 				402AAFDA215DBA8200BF8815 /* Assets.xcassets */,
 				402AAFDC215DBA8200BF8815 /* LaunchScreen.storyboard */,
@@ -132,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				402AAFFC215DD19A00BF8815 /* DataStructures.swift */,
-				40CC09FD215DD7D800AC9A38 /* LoadData.swift */,
+				40CC09FD215DD7D800AC9A38 /* DataHandler.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -195,8 +246,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402717E1215EEDB300C886F8 /* 203.jpg in Resources */,
 				402AAFDE215DBA8200BF8815 /* LaunchScreen.storyboard in Resources */,
 				402AAFDB215DBA8200BF8815 /* Assets.xcassets in Resources */,
+				402717D9215EDADA00C886F8 /* SF-Pro-Text-Light.otf in Resources */,
+				402717DA215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf in Resources */,
 				40CC0A02215DD84200AC9A38 /* Topic2History.json in Resources */,
 				402AAFE7215DBE3A00BF8815 /* Topic1Events.json in Resources */,
 				402AAFD9215DBA8000BF8815 /* Main.storyboard in Resources */,
@@ -211,14 +265,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				402AAFF2215DC03B00BF8815 /* Button.swift in Sources */,
+				402717E4215EF2B900C886F8 /* QuestionChoiceView.swift in Sources */,
 				402AAFFD215DD19A00BF8815 /* DataStructures.swift in Sources */,
 				402AAFD6215DBA8000BF8815 /* ViewController.swift in Sources */,
 				402AAFEC215DBEE500BF8815 /* MenuView.swift in Sources */,
 				402AAFEE215DBEFA00BF8815 /* View.swift in Sources */,
 				402AAFF8215DD10900BF8815 /* TopicScrollView.swift in Sources */,
-				40CC09FE215DD7D800AC9A38 /* LoadData.swift in Sources */,
+				40CC09FE215DD7D800AC9A38 /* DataHandler.swift in Sources */,
+				402717D6215EC98F00C886F8 /* RadioButton.swift in Sources */,
 				402AAFF0215DBFD900BF8815 /* ScreenScaler.swift in Sources */,
 				402AAFEA215DBED700BF8815 /* PlayTSV.swift in Sources */,
+				402717DE215EE95B00C886F8 /* QuestionView.swift in Sources */,
+				402717DC215EE01B00C886F8 /* QuestionHandler.swift in Sources */,
+				402717D4215EC94800C886F8 /* TopicScrollViewCell.swift in Sources */,
+				402717E6216071FE00C886F8 /* QuestionFinishedView.swift in Sources */,
 				402AAFF6215DC1E900BF8815 /* Label.swift in Sources */,
 				402AAFD4215DBA8000BF8815 /* AppDelegate.swift in Sources */,
 			);
