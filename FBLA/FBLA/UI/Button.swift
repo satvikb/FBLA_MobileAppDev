@@ -24,7 +24,7 @@ class Button : UIView {
         super.init(frame: outFrame);
         
         let labelFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
-        label = Label(outFrame: labelFrame, inFrame: labelFrame)
+        label = Label(outFrame: labelFrame, inFrame: labelFrame, text: "", textColor: UIColor.black, valign: .Default, _insets: false)
         label.text = text;
         label.textAlignment = .center;
         self.addSubview(label)

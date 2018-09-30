@@ -27,7 +27,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
     
     var choiceViews : [QuestionChoiceView] = []
     
-    var inputField : UITextField!;
+    var inputField : TextField!;
     var numberInputOnly : Bool = false
     
     var submitButton : Button!
@@ -57,6 +57,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         var questionFrame : CGRect! = CGRect.zero
         var questionFrameOut : CGRect! = CGRect.zero
 
+        
         if(question.choices.keys.count > 0){ //TODO or questionType == mc?
             var choices : [QuestionChoice] = []
             for (choiceName, choiceValue) in question.choices {
@@ -97,7 +98,30 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             questionFrameOut = propToRect(prop: CGRect(x: 0, y: -0.3, width: 1, height: 0.3), frame: self.frame)
 
         }else if(questionType == .Number || questionType == .Text){
-            inputField = UITextField(frame: propToRect(prop: CGRect(x: 0.05, y: 0.325, width: 0.9, height: 0.1), frame: self.frame))
+            var inputFieldFrame : CGRect! = propToRect(prop: CGRect(x: 0.05, y: 0.325, width: 0.9, height: 0.1), frame: self.frame)
+            var inputFieldFrameOut : CGRect! = propToRect(prop: CGRect(x: 1.05, y: 0.325, width: 0.9, height: 0.1), frame: self.frame)
+
+            
+            numberInputOnly = questionType == .Number
+            
+            if(question.imageURL == ""){
+                submitButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+                submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+
+                questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame)
+                questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame)
+            }else{
+                submitButtonFrame = propToRect(prop: CGRect(x: 0.75, y: 0.45, width: 0.2, height: 0.1), frame: self.frame)
+                submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+                
+                questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.425), frame: self.frame)
+                questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.425), frame: self.frame)
+                
+                inputFieldFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
+                inputFieldFrameOut = propToRect(prop: CGRect(x: 1.05, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
+            }
+            
+            inputField = TextField(outFrame: inputFieldFrameOut, inFrame: inputFieldFrame)
             inputField.placeholder = "Enter answer here"
             inputField.font = UIFont.systemFont(ofSize: 15)
             inputField.borderStyle = UITextField.BorderStyle.roundedRect
@@ -109,14 +133,6 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             inputField.delegate = self
             self.addSubview(inputField)
             
-            numberInputOnly = questionType == .Number
-            
-            submitButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
-            submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
-
-            questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame)
-            questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame)
-
         }
         
         
@@ -134,7 +150,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
                 self.inputField.resignFirstResponder()
             }
             
-            self.delegate?.submitButtonPressed(correctAnswer: self.questionType == .MultipleChoice ? self.testIfCurrentlySelectedIsAnswer() : question.correctAnswer.contains(self.inputField.text!), correctAnswerText: self.questionType == .MultipleChoice ? self.getCorrectAnswerText() : question.correctAnswer)
+            self.delegate?.submitButtonPressed(correctAnswer: self.questionType == .MultipleChoice ? self.testIfCurrentlySelectedIsAnswer() : question.correctAnswer.lowercased().contains(self.inputField.text!.lowercased()), correctAnswerText: self.questionType == .MultipleChoice ? self.getCorrectAnswerText() : question.correctAnswer)
         }
         self.addSubview(submitButton)
     }
@@ -177,6 +193,10 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         questionTextLabel.animateIn()
         submitButton.animateIn()
         
+        if(inputField != nil){
+            inputField.animateIn()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
             completion()
         })
@@ -190,6 +210,10 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         
         questionTextLabel.animateOut()
         submitButton.animateOut()
+        
+        if(inputField != nil){
+            inputField.animateOut()
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
             completion()

@@ -35,10 +35,24 @@ class PlayTSV : View{
             //get selected topics
             var topics : [Topic] = []
             let selectedTopicInfo = self.topicScrollView.getSelectedTopicInfo()
+            
+            let completedQuestions = DataHandler.getCompletedQuestions()
+            
             for info in selectedTopicInfo {
                 for topic in allData.topics {
                     if topic.topicId == info.topicId {
-                        topics.append(topic)
+                        var filteredTopic = topic
+                        //remove completed questions
+                        //TODO make this an option
+                        for question in filteredTopic.questions {
+                            if(completedQuestions.contains(question.questionId)){
+                                if let index:Int = filteredTopic.questions.index(where: {$0.questionId == question.questionId}) {
+                                    filteredTopic.questions.remove(at: index)
+                                }
+                            }
+                        }
+                        
+                        topics.append(filteredTopic)
                     }
                 }
             }

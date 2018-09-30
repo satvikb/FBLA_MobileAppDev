@@ -19,6 +19,7 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     weak var delegate : QuestionHandlerDelegate?
     var topicSet : [Topic]! = []
     
+    var currentTopic : Topic!
     var currentQuestion : Question!;
     var currentQuestionView : QuestionView!
     var questionFinishedView : QuestionFinishedView!
@@ -34,18 +35,32 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     }
     
     func createQuestionView(){
-        currentQuestion = nextQuestion()
-        currentQuestionView = QuestionView(frame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.85), frame: self.frame), question: currentQuestion)
-        currentQuestionView.layer.borderWidth = 1
-        currentQuestionView.delegate = self
-        self.addSubview(currentQuestionView)
-        
-        currentQuestionView.animateIn(completion: {})
+        if(questionAvailable()){
+            currentQuestion = nextQuestion()
+            currentQuestionView = QuestionView(frame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.85), frame: self.frame), question: currentQuestion)
+            currentQuestionView.layer.borderWidth = 1
+            currentQuestionView.delegate = self
+            self.addSubview(currentQuestionView)
+            
+            currentQuestionView.animateIn(completion: {})
+        }else{
+            //TODO
+        }
     }
     
     func submitButtonPressed(correctAnswer: Bool, correctAnswerText: String) {
         if(correctAnswer){
             answerStreak += 1
+            
+            DataHandler.completedQuestion(questionId: currentQuestion.questionId)
+            
+            if let topicIndex:Int = self.topicSet.index(where: {$0.topicId == currentTopic.topicId}) {
+                if let index:Int = self.topicSet[topicIndex].questions.index(where: {$0.questionId == currentQuestion.questionId}) {
+                    self.topicSet[topicIndex].questions.remove(at: index)
+                }
+            }
+            
+//            currentTopic.questions.remove(at: currentTopic.questions.indexof)
         }
 //        if(correctAnswer){
             currentQuestionView.animateOut(completion: {
@@ -77,7 +92,8 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     
     //todo
     func nextQuestion() -> Question {
-        return topicSet.randomElement()!.questions.randomElement()!
+        currentTopic = topicSet.randomElement()!
+        return currentTopic.questions.randomElement()!
     }
     
     func nextQuestionButtonPressed() {
@@ -85,7 +101,9 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
             self.questionFinishedView.removeFromSuperview()
         })
         
-        createQuestionView()
+        if(questionAvailable()){
+            createQuestionView()
+        }
     }
     
     func homeButtonPressed() {
