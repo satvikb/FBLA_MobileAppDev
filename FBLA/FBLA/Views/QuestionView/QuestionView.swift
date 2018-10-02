@@ -30,6 +30,8 @@ class QuestionView : View, QuestionChoiceViewDelegate {
     var inputField : TextField!;
     var numberInputOnly : Bool = false
     
+    var imageView : ImageView!
+    
     var submitButton : Button!
     
     init(frame: CGRect, question : Question) {
@@ -74,11 +76,12 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             
             choices.shuffle()
             
+            let hasImage = question.imageURL != ""
             
             var i : Int = 0
-            let cellHeight : CGFloat = 0.12
-            let verticalPadding : CGFloat = 0.0066
-            let topOffset : CGFloat = 0.3
+            let cellHeight : CGFloat = hasImage ? 0.09 : 0.12
+            let verticalPadding : CGFloat = hasImage ? 0.014 : 0.02375
+            let topOffset : CGFloat = hasImage ? 0.425 : 0.3
             
             for choice in choices {
                 let choiceViewOutFrame = propToRect(prop: CGRect(x: i%2 == 0 ? -1 : 1, y: topOffset + (cellHeight+verticalPadding) * CGFloat(i), width: 1, height: cellHeight), frame: self.frame)
@@ -91,12 +94,22 @@ class QuestionView : View, QuestionChoiceViewDelegate {
                 i += 1;
             }
             
-            submitButtonFrame = propToRect(prop: CGRect(x: 0, y: 0.8, width: 1, height: 0.2), frame: self.frame)
-            submitButtonFrameOut = propToRect(prop: CGRect(x: -1, y: 0.8, width: 1, height: 0.2), frame: self.frame)
+            submitButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.875, width: 0.9, height: 0.1), frame: self.frame)
+            submitButtonFrameOut = propToRect(prop: CGRect(x: -1, y: 0.875, width: 0.9, height: 0.1), frame: self.frame)
 
             questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame)
             questionFrameOut = propToRect(prop: CGRect(x: 0, y: -0.3, width: 1, height: 0.3), frame: self.frame)
 
+            if(hasImage){
+//                submitButtonFrame = propToRect(prop: CGRect(x: 0.75, y: 0.45, width: 0.2, height: 0.1), frame: self.frame)
+//                submitButtonFrameOut = propToRect(prop: CGRect(x: 1, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+                
+                questionFrame = propToRect(prop: CGRect(x: 0, y: 0.3, width: 1, height: 0.125), frame: self.frame)
+                questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0.3, width: 1, height: 0.125), frame: self.frame)
+                
+                createImageView(outFrame: propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame), imageURL: question.imageURL)
+            }
+            
         }else if(questionType == .Number || questionType == .Text){
             var inputFieldFrame : CGRect! = propToRect(prop: CGRect(x: 0.05, y: 0.325, width: 0.9, height: 0.1), frame: self.frame)
             var inputFieldFrameOut : CGRect! = propToRect(prop: CGRect(x: 1.05, y: 0.325, width: 0.9, height: 0.1), frame: self.frame)
@@ -104,6 +117,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             
             numberInputOnly = questionType == .Number
             
+            //TODO test if not blank and ALSO loads an image (valid url)
             if(question.imageURL == ""){
                 submitButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
                 submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
@@ -112,13 +126,18 @@ class QuestionView : View, QuestionChoiceViewDelegate {
                 questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame)
             }else{
                 submitButtonFrame = propToRect(prop: CGRect(x: 0.75, y: 0.45, width: 0.2, height: 0.1), frame: self.frame)
-                submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+                submitButtonFrameOut = propToRect(prop: CGRect(x: 1, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
                 
-                questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.425), frame: self.frame)
-                questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.425), frame: self.frame)
+                questionFrame = propToRect(prop: CGRect(x: 0, y: 0.3, width: 1, height: 0.125), frame: self.frame)
+                questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0.3, width: 1, height: 0.125), frame: self.frame)
                 
                 inputFieldFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
-                inputFieldFrameOut = propToRect(prop: CGRect(x: 1.05, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
+                inputFieldFrameOut = propToRect(prop: CGRect(x: -0.7, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
+                
+//                imageView = ImageView(outFrame: propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame))
+//                imageView.image = UIImage(named: question.imageURL)
+//                self.addSubview(imageView)
+                createImageView(outFrame: propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame), imageURL: question.imageURL)
             }
             
             inputField = TextField(outFrame: inputFieldFrameOut, inFrame: inputFieldFrame)
@@ -131,6 +150,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             inputField.clearButtonMode = UITextField.ViewMode.whileEditing;
             inputField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
             inputField.delegate = self
+            inputField.becomeFirstResponder()
             self.addSubview(inputField)
             
         }
@@ -143,9 +163,8 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         questionTextLabel.layer.borderColor = UIColor.yellow.cgColor
         self.addSubview(questionTextLabel)
         
-        submitButton = Button(outFrame: submitButtonFrameOut, inFrame: submitButtonFrame, text: "Submit")
+        submitButton = Button(outFrame: submitButtonFrameOut, inFrame: submitButtonFrame, text: "Submit", _insets: false)
         submitButton.pressed = {
-            print("SUBMIT")
             if(self.questionType != .MultipleChoice){
                 self.inputField.resignFirstResponder()
             }
@@ -155,6 +174,16 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         self.addSubview(submitButton)
     }
     
+    func createImageView(outFrame: CGRect, inFrame : CGRect, imageURL : String){
+        if let image = UIImage(named: imageURL) {
+        
+            imageView = ImageView(outFrame: outFrame, inFrame: inFrame)
+            imageView.image = image
+            imageView.layer.borderWidth = 3
+            imageView.contentMode = .scaleAspectFit
+            self.addSubview(imageView)
+        }
+    }
     
     //TODO replace selectedButton.enabled with isSelected()
     func testIfCurrentlySelectedIsAnswer() -> Bool{
@@ -197,6 +226,10 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             inputField.animateIn()
         }
         
+        if(imageView != nil){
+            imageView.animateIn()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
             completion()
         })
@@ -213,6 +246,10 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         
         if(inputField != nil){
             inputField.animateOut()
+        }
+        
+        if(imageView != nil){
+            imageView.animateOut()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
@@ -238,40 +275,40 @@ extension QuestionView: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         // return NO to disallow editing.
-        print("TextField should begin editing method called")
+//        print("TextField should begin editing method called")
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // became first responder
-        print("TextField did begin editing method called")
+//        print("TextField did begin editing method called")
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
-        print("TextField should snd editing method called")
+//        print("TextField should snd editing method called")
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
-        print("TextField did end editing method called")
+//        print("TextField did end editing method called")
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         // if implemented, called in place of textFieldDidEndEditing:
-        print("TextField did end editing with reason method called")
+//        print("TextField did end editing with reason method called")
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         // called when clear button pressed. return NO to ignore (no notifications)
-        print("TextField should clear method called")
+//        print("TextField should clear method called")
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // called when 'return' key pressed. return NO to ignore.
-        print("TextField should return method called")
+//        print("TextField should return method called")
         // may be useful: textField.resignFirstResponder()
         return true
     }

@@ -1,0 +1,34 @@
+{
+    "topicId": 3,
+    "topicName": "FBLA Officers",
+    "questions":[
+        {
+            "questionDifficulty": 1,
+            "questionId":"301",
+            "question":"What is an officer?",
+            "imageURL":"301.jpg",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Someone that does nothing.",
+                "B":"😘.",
+                "C":"😎.",
+                "D":"🤬"
+            },
+            "correctAnswer":"C"
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"302",
+            "question":"What is your favorite emoji?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"🤔",
+                "B":"😢",
+                "C":"👏🏻",
+                "D":"🤷🏻‍♀️"
+            },
+            "correctAnswer":"D"
+        }
+    ]
+}

@@ -17,18 +17,21 @@ class Button : UIView {
     var outFrame : CGRect!;
     var inFrame : CGRect!;
     
-    init(outFrame : CGRect, inFrame: CGRect, text: String = "") {
+    init(outFrame : CGRect, inFrame: CGRect, text: String = "", _insets: Bool = false) {
         self.outFrame = outFrame
         self.inFrame = inFrame
         
         super.init(frame: outFrame);
         
-        let labelFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height);
-        label = Label(outFrame: labelFrame, inFrame: labelFrame, text: "", textColor: UIColor.black, valign: .Default, _insets: false)
+        let labelFrame = CGRect(x: 0, y: 0, width: inFrame.width, height: inFrame.height);
+        label = Label(outFrame: labelFrame, inFrame: labelFrame, text: "", textColor: UIColor.black, valign: .Default, _insets: _insets)
         label.text = text;
         label.textAlignment = .center;
+//        label.layer.borderWidth = 3
         self.addSubview(label)
         
+        self.layer.cornerRadius = self.frame.size.height/10
+
         self.backgroundColor = UIColor.blue;
     }
     

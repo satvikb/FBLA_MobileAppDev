@@ -11,10 +11,10 @@ import UIKit
 class View : UIView {
     
     func animateIn(completion: @escaping () -> Void){
-        print("Animate in not immplemented")
+        print("Animate in not implemented")
     }
     
     func animateOut(completion: @escaping () -> Void){
-        print("Animate out not immplemented")
+        print("Animate out not implemented")
     }
 }

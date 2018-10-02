@@ -64,12 +64,15 @@ class DataHandler {
         saveCompletedQuestions(questions: current)
     }
     
+    static func resetCompletedQuestions(){
+        saveCompletedQuestions(questions: [])
+    }
+    
     static func getTopicInfo() -> [TopicInfo] {
         var allTopicInfo : [TopicInfo] = []
         
         for topic in allData.topics {
             let topicInfo = TopicInfo(topicId: topic.topicId, topicName: topic.topicName, topicQuestions: topic.questions.count, questionsComplete: getQuestionsCompleteFromTopic(topic: topic))
-            print(topicInfo)
             allTopicInfo.append(topicInfo)
         }
         

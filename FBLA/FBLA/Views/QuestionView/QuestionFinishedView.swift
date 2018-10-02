@@ -10,7 +10,7 @@ import UIKit
 
 protocol QuestionFinishedViewDelegate : class {
     func nextQuestionButtonPressed()
-    func homeButtonPressed()
+    func questionFinishedHomeButton()
 }
 
 class QuestionFinishedView : View {
@@ -63,7 +63,7 @@ class QuestionFinishedView : View {
         let homeButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.7, width: 0.4, height: 0.2), frame: self.frame)
         homeButton = Button(outFrame: homeButtonFrame, inFrame: homeButtonFrame, text: "Home")
         homeButton.pressed = {
-            self.delegate?.homeButtonPressed()
+            self.delegate?.questionFinishedHomeButton()
         }
         self.addSubview(homeButton)
     }
@@ -72,7 +72,7 @@ class QuestionFinishedView : View {
         
         resultLabel.text = didAnswerCorrectly == true ? "CORRECT" : "WRONG"
         answerStreakLabel.text = "Answer streak: \(answerStreak)"
-        actualAnswerLabel.text = actualAnswer
+        actualAnswerLabel.text = didAnswerCorrectly ? "" : actualAnswer
     }
     
     override func animateIn(completion: @escaping () -> Void) {

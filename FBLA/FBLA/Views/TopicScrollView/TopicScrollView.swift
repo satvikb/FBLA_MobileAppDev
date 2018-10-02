@@ -30,6 +30,7 @@ class TopicScrollView : UIScrollView {
         let cellWidth = 0.95
         var cellIndex : Double = 0
         
+        //TODO updateTopicInfo() function to update cell data
         for topic in topicInfo {
             let cell = TopicScrollViewCell(frame: propToRect(prop: CGRect(x: (1-cellWidth)/2, y: topPadding + (cellHeight + verticalCellPadding) * cellIndex, width: cellWidth, height: cellHeight), frame: self.frame), topicInfo: topic, selected: true)
             cells.append(cell)
@@ -41,7 +42,7 @@ class TopicScrollView : UIScrollView {
         let realHeight = propToFloat(prop: CGFloat(propHeight), by: self.frame.height)
         self.contentSize = CGSize(width: self.frame.size.width, height: realHeight)
         
-        self.layer.borderWidth = 2
+//        self.layer.borderWidth = 2
     }
     
     func getSelectedTopicInfo() -> [TopicInfo]{

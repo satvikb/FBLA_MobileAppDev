@@ -18,10 +18,12 @@ enum ViewType{
     case ResetTSV
 }
 
-var transitionTime : CGFloat = 0.5
+var transitionTime : CGFloat = 0.3
 var allData : AllData!
 
 class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, QuestionHandlerDelegate {
+
+    
 
     
 
@@ -48,23 +50,17 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         questionHandler.delegate = self
         
         switchBetweenViews(to: .Menu)
-        print("SDF")
-        
-       
     }
     
     func switchBetweenViews(to: ViewType) {
         switch currentView! {
         case .Menu:
             menuView.animateOut(completion: {
-                print("menu animate out done")
                 self.menuView.removeFromSuperview()
-
             })
             break
         case .PlayTSV:
             playTSV.animateOut(completion: {
-                print("play tsv animate out done")
                 self.playTSV.removeFromSuperview()
             })
             break
@@ -81,19 +77,20 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         case .Menu:
             self.view.addSubview(menuView)
             menuView.animateIn(completion: {
-                print("menu animate in done")
+
             })
             break;
         case .PlayTSV:
             self.view.addSubview(playTSV)
+            self.view.sendSubviewToBack(playTSV)
             playTSV.animateIn(completion: {
-                print("play tsv animate in done")
+                self.view.bringSubviewToFront(self.playTSV) //TODO without this, playTSV becomes unresponsive
             })
             break;
         case .QuestionHandler:
             self.view.addSubview(questionHandler)
             questionHandler.animateIn(completion: {
-                print("question handler animate in")
+
             })
             break;
         default:
@@ -107,10 +104,15 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     }
 
     func playTSVPlayButtonPressed(selectedTopics: [Topic]) {
-        questionHandler.topicSet = selectedTopics
+//        questionHandler.topicSet = selectedTopics
+        questionHandler.setTopicSet(topics: selectedTopics)
         questionHandler.createQuestionView()
         
         switchBetweenViews(to: .QuestionHandler)
+    }
+    
+    func questionHandlerHomeButtonPressed() {
+        switchBetweenViews(to: .PlayTSV)
     }
 }
 

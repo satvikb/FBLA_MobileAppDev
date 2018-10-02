@@ -10,19 +10,26 @@ import UIKit
 
 protocol QuestionHandlerDelegate : class {
 //    func playTSVPlayButtonPressed(selectedTopics : [Topic])
+    func questionHandlerHomeButtonPressed()
 }
 
-class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate{
+class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate, AllQuestionsCompleteViewDelegate{
     
     
     
     weak var delegate : QuestionHandlerDelegate?
-    var topicSet : [Topic]! = []
+    
+    private var topicSet : [Topic]! = []
+    
+    var startTotalQuestions : Int = 0
     
     var currentTopic : Topic!
     var currentQuestion : Question!;
     var currentQuestionView : QuestionView!
+    var currentQuestionInfoView : QuestionInfoView!
+
     var questionFinishedView : QuestionFinishedView!
+    var allQuestionsCompleteView : AllQuestionsCompleteView!
     
     var answerStreak : Int = 0
     
@@ -34,17 +41,32 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
 //        self.addSubview(questionFinishedView)
     }
     
+    func setTopicSet(topics : [Topic]){
+        topicSet = topics
+        
+        startTotalQuestions = totalQuestionsRemaining()
+    }
+    
     func createQuestionView(){
         if(questionAvailable()){
             currentQuestion = nextQuestion()
+            
             currentQuestionView = QuestionView(frame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.85), frame: self.frame), question: currentQuestion)
-            currentQuestionView.layer.borderWidth = 1
             currentQuestionView.delegate = self
             self.addSubview(currentQuestionView)
-            
+            self.sendSubviewToBack(currentQuestionView) //to be behind question finished view
             currentQuestionView.animateIn(completion: {})
+
+            currentQuestionInfoView = QuestionInfoView(frame: propToRect(prop: CGRect(x: 0.3, y: 0, width: 0.7, height: 0.15), frame: self.frame), topicName: currentTopic.topicName, counterString: "\((startTotalQuestions - self.totalQuestionsRemaining())+1) / \(self.startTotalQuestions)")
+            self.addSubview(currentQuestionInfoView)
+            self.sendSubviewToBack(currentQuestionInfoView)
+            currentQuestionInfoView.animateIn(completion: {})
         }else{
-            //TODO
+            allQuestionsCompleteView = AllQuestionsCompleteView(outFrame: propToRect(prop: CGRect(x: 1, y: 0.05, width: 0.9, height: 0.9), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.05, width: 0.9, height: 0.9), frame: self.frame))
+            allQuestionsCompleteView.delegate = self
+            self.addSubview(allQuestionsCompleteView)
+            
+            allQuestionsCompleteView.animateIn(completion: {})
         }
     }
     
@@ -59,19 +81,19 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
                     self.topicSet[topicIndex].questions.remove(at: index)
                 }
             }
-            
-//            currentTopic.questions.remove(at: currentTopic.questions.indexof)
         }
-//        if(correctAnswer){
-            currentQuestionView.animateOut(completion: {
-                self.currentQuestionView.removeFromSuperview()
-            })
+        
+        currentQuestionView.animateOut(completion: {
+            self.currentQuestionView.removeFromSuperview()
+        })
+        currentQuestionInfoView.animateOut(completion: {
+            self.currentQuestionInfoView.removeFromSuperview()
+        })
         
         self.addSubview(questionFinishedView)
         questionFinishedView.updateUI(didAnswerCorrectly: correctAnswer, answerStreak: answerStreak, actualAnswer: correctAnswerText)
         questionFinishedView.animateIn(completion: {})
         self.bringSubviewToFront(questionFinishedView)
-//        }
         
         if(!correctAnswer){
             answerStreak = 0
@@ -92,7 +114,10 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     
     //todo
     func nextQuestion() -> Question {
-        currentTopic = topicSet.randomElement()!
+        repeat{
+            currentTopic = topicSet.randomElement()!
+        }while(currentTopic.questions.count == 0)
+        
         return currentTopic.questions.randomElement()!
     }
     
@@ -101,13 +126,22 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
             self.questionFinishedView.removeFromSuperview()
         })
         
-        if(questionAvailable()){
-            createQuestionView()
-        }
+        createQuestionView()
+        
     }
     
-    func homeButtonPressed() {
-        
+    func questionFinishedHomeButton() {
+        questionFinishedView.animateOut(completion: {
+            self.questionFinishedView.removeFromSuperview()
+        })
+        self.delegate?.questionHandlerHomeButtonPressed()
+    }
+    
+    func allQuestionsCompleteHomeButton() {
+        allQuestionsCompleteView.animateOut(completion: {
+            self.allQuestionsCompleteView.removeFromSuperview()
+        })
+        self.delegate?.questionHandlerHomeButtonPressed()
     }
     
     required init?(coder aDecoder: NSCoder) {

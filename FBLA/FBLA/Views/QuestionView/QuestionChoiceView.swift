@@ -35,13 +35,13 @@ class QuestionChoiceView : UIView {
         
         selectedButton = RadioButton(outPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), inPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), radius: propToFloat(prop: 0.5, by: self.frame.size.height), text: "", enabled: selected)
         selectedButton.pressed = {
-            print("Pressed")
             self.delegate?.selectionChange(choiceView: self, selected: self.selectedButton.enabled)
         }
         self.addSubview(selectedButton)
         
         choiceTextLabel = Label(outFrame: propToRect(prop: CGRect(x: 0.15, y: 0, width: 0.85, height: 1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.3, y: 0, width: 0.5, height: 1), frame: self.frame), text: choice.choiceValue, textColor: UIColor.black, valign: .Default, _insets: false)
-        
+//        choiceTextLabel.adjustsFontSizeToFitWidth = false
+        choiceTextLabel.numberOfLines = 2
 //        choiceTextLabel.layer.borderWidth = 3
         
         self.addSubview(choiceTextLabel)
@@ -49,6 +49,21 @@ class QuestionChoiceView : UIView {
         self.layer.borderColor = UIColor.green.cgColor
         self.layer.borderWidth = 3
     }
+    
+    
+    //Handle touching in the view but not the button
+    var touchDown : Bool = false
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touchDown = true;
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(touchDown){
+            selectedButton.buttonPressed()
+            touchDown = false;
+        }
+    }
+    
     
     func animateIn(time: CGFloat = transitionTime) {
         UIView.animate(withDuration: TimeInterval(time), animations: {
