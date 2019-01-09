@@ -14,7 +14,8 @@
                 "C":"Something you do for college applications.",
                 "D":"An activity that can come in many different types completed for experience."
             },
-            "correctAnswer":"D"
+            "correctAnswer":"D",
+            "timeToAnswer":5
         },
         {
             "questionDifficulty": 4,
@@ -28,7 +29,8 @@
                 "C":"Pay FBLA Dues and let your FBLA sponsor know what event you want to compete in.",
                 "D":"I don't want to be in an FBLA Event."
             },
-            "correctAnswer":"C"
+            "correctAnswer":"C",
+            "timeToAnswer":5
         }
     ]
 }

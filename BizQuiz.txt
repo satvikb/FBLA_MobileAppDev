@@ -1,0 +1,11 @@
+TODO
+Settings Page
+	How to play
+	Report bug
+	Reset data
+	
+
+
+Instructions
+	Readme
+	

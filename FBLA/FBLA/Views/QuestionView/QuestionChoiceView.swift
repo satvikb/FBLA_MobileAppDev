@@ -15,7 +15,7 @@ protocol QuestionChoiceViewDelegate : class {
 class QuestionChoiceView : UIView {
     
     weak var delegate : QuestionChoiceViewDelegate?
-    var selectedButton : RadioButton!;
+//    var selectedButton : RadioButton!;
     var choiceTextLabel : Label!;
     
     var choice : QuestionChoice!
@@ -23,6 +23,8 @@ class QuestionChoiceView : UIView {
     
     var outFrame : CGRect!;
     var inFrame : CGRect!;
+    
+    var selected : Bool = false
     
     init(outFrame: CGRect, inFrame: CGRect, choice : QuestionChoice, choiceId : Int, selected : Bool = true) {
         self.outFrame = outFrame
@@ -33,15 +35,19 @@ class QuestionChoiceView : UIView {
         self.choice = choice
         self.choiceId = choiceId
         
-        selectedButton = RadioButton(outPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), inPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), radius: propToFloat(prop: 0.5, by: self.frame.size.height), text: "", enabled: selected)
-        selectedButton.pressed = {
-            self.delegate?.selectionChange(choiceView: self, selected: self.selectedButton.enabled)
-        }
-        self.addSubview(selectedButton)
+        //actually button diameter
+//        let buttonRadius = propToFloat(prop: 0.75, by: self.frame.size.height)
+//        selectedButton = RadioButton(outPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), inPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), radius: buttonRadius, text: "", enabled: selected)
+//        selectedButton.pressed = {
+//            self.delegate?.selectionChange(choiceView: self, selected: self.selectedButton.enabled)
+//        }
+//        self.addSubview(selectedButton)
         
-        choiceTextLabel = Label(outFrame: propToRect(prop: CGRect(x: 0.15, y: 0, width: 0.85, height: 1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.3, y: 0, width: 0.5, height: 1), frame: self.frame), text: choice.choiceValue, textColor: UIColor.black, valign: .Default, _insets: false)
-//        choiceTextLabel.adjustsFontSizeToFitWidth = false
-        choiceTextLabel.numberOfLines = 2
+        let initialFrame = propToRect(prop: CGRect(x: 0.05, y: 0, width: 0.9, height: 1), frame: self.frame)
+        
+        choiceTextLabel = Label(outFrame: CGRect(x: initialFrame.origin.x, y: initialFrame.origin.y, width: initialFrame.size.width, height: initialFrame.size.height), inFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 1), frame: self.frame), text: choice.choiceValue, textColor: UIColor.black, valign: .Default, _insets: false)
+        choiceTextLabel.adjustsFontSizeToFitWidth = true
+        choiceTextLabel.numberOfLines = 10
 //        choiceTextLabel.layer.borderWidth = 3
         
         self.addSubview(choiceTextLabel)
@@ -59,7 +65,8 @@ class QuestionChoiceView : UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(touchDown){
-            selectedButton.buttonPressed()
+//            selectedButton.buttonPressed()
+            selected = true
             touchDown = false;
         }
     }

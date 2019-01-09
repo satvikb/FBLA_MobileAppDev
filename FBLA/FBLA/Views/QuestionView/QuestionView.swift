@@ -22,6 +22,8 @@ class QuestionView : View, QuestionChoiceViewDelegate {
    
     weak var delegate : QuestionViewDelegate?
     
+    var timer : CircleTimer = CircleTimer.null
+
     var questionTextLabel : Label!
     var questionType : QuestionType!
     
@@ -34,12 +36,18 @@ class QuestionView : View, QuestionChoiceViewDelegate {
     
     var submitButton : Button!
     
+    var question : Question!
+    
     init(frame: CGRect, question : Question) {
         super.init(frame: frame)
         
+        self.question = question
+        
+        var useSubmitButton = true
         switch question.choiceType.lowercased() {
         case "mc":
             questionType = .MultipleChoice
+            useSubmitButton = false
             break;
         case "txt":
             questionType = .Text
@@ -49,6 +57,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             break;
         default:
             questionType = .MultipleChoice
+            useSubmitButton = false
             break;
         }
         
@@ -59,6 +68,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         var questionFrame : CGRect! = CGRect.zero
         var questionFrameOut : CGRect! = CGRect.zero
 
+        var timerFrame : CGRect! = propToRect(prop: CGRect(x: 0.05, y: 0.1, width: 0.125, height: 0.125), frame: self.frame)
         
         if(question.choices.keys.count > 0){ //TODO or questionType == mc?
             var choices : [QuestionChoice] = []
@@ -79,7 +89,7 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             let hasImage = question.imageURL != ""
             
             var i : Int = 0
-            let cellHeight : CGFloat = hasImage ? 0.09 : 0.12
+            let cellHeight : CGFloat = hasImage ? 0.115 : 0.145
             let verticalPadding : CGFloat = hasImage ? 0.014 : 0.02375
             let topOffset : CGFloat = hasImage ? 0.425 : 0.3
             
@@ -107,6 +117,8 @@ class QuestionView : View, QuestionChoiceViewDelegate {
                 questionFrame = propToRect(prop: CGRect(x: 0, y: 0.3, width: 1, height: 0.125), frame: self.frame)
                 questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0.3, width: 1, height: 0.125), frame: self.frame)
                 
+                timerFrame = propToRect(prop: CGRect(x: 0.05, y: 0.33125, width: 0.125, height: 0.125), frame: self.frame)
+                
                 createImageView(outFrame: propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame), imageURL: question.imageURL)
             }
             
@@ -121,6 +133,9 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             if(question.imageURL == ""){
                 submitButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
                 submitButtonFrameOut = propToRect(prop: CGRect(x: -0.9, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
+                
+                //no image, number/text
+                timerFrame = propToRect(prop: CGRect(x: 0.1, y: 0.1, width: 0.125, height: 0.125), frame: self.frame)
 
                 questionFrame = propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.3), frame: self.frame)
                 questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0, width: 1, height: 0.3), frame: self.frame)
@@ -128,9 +143,12 @@ class QuestionView : View, QuestionChoiceViewDelegate {
                 submitButtonFrame = propToRect(prop: CGRect(x: 0.75, y: 0.45, width: 0.2, height: 0.1), frame: self.frame)
                 submitButtonFrameOut = propToRect(prop: CGRect(x: 1, y: 0.45, width: 0.9, height: 0.1), frame: self.frame)
                 
-                questionFrame = propToRect(prop: CGRect(x: 0, y: 0.3, width: 1, height: 0.125), frame: self.frame)
+                questionFrame = propToRect(prop: CGRect(x: 0.2, y: 0.3, width: 0.8, height: 0.125), frame: self.frame)
                 questionFrameOut = propToRect(prop: CGRect(x: -1, y: 0.3, width: 1, height: 0.125), frame: self.frame)
-                
+
+                //with image, number/text
+                timerFrame = propToRect(prop: CGRect(x: 0.1, y: 0.3625, width: 0.1, height: 0.125), frame: self.frame)
+
                 inputFieldFrame = propToRect(prop: CGRect(x: 0.05, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
                 inputFieldFrameOut = propToRect(prop: CGRect(x: -0.7, y: 0.45, width: 0.7, height: 0.1), frame: self.frame)
                 
@@ -165,13 +183,37 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         
         submitButton = Button(outFrame: submitButtonFrameOut, inFrame: submitButtonFrame, text: "Submit", _insets: false)
         submitButton.pressed = {
-            if(self.questionType != .MultipleChoice){
-                self.inputField.resignFirstResponder()
-            }
-            
-            self.delegate?.submitButtonPressed(correctAnswer: self.questionType == .MultipleChoice ? self.testIfCurrentlySelectedIsAnswer() : question.correctAnswer.lowercased().contains(self.inputField.text!.lowercased()), correctAnswerText: self.questionType == .MultipleChoice ? self.getCorrectAnswerText() : question.correctAnswer)
+            self.submitAnswer()
         }
-        self.addSubview(submitButton)
+        if(useSubmitButton){
+            self.addSubview(submitButton)
+        }
+        
+        
+        
+        timerFrame = CGRect(origin: timerFrame.origin, size: CGSize(width: timerFrame.width, height: timerFrame.width))
+        timer = CircleTimer(frame: timerFrame, lineWidth: 6)
+        
+//        let animatedCircle = AnimatedCircle()
+//        self.addSubview(animatedCircle)
+//        self.bringSubviewToFront(animatedCircle)
+//        animatedCircle.runAnimation()
+//
+        timer.done = {
+//            self.GameOver()
+            print("timer done")
+        }
+        
+        self.addSubview(timer)
+
+    }
+    
+    func submitAnswer(){
+        if(self.questionType != .MultipleChoice){
+            self.inputField.resignFirstResponder()
+        }
+        
+        self.delegate?.submitButtonPressed(correctAnswer: self.questionType == .MultipleChoice ? self.testIfCurrentlySelectedIsAnswer() : question.correctAnswer.lowercased().contains(self.inputField.text!.lowercased()), correctAnswerText: self.questionType == .MultipleChoice ? self.getCorrectAnswerText() : question.correctAnswer)
     }
     
     func createImageView(outFrame: CGRect, inFrame : CGRect, imageURL : String){
@@ -188,13 +230,13 @@ class QuestionView : View, QuestionChoiceViewDelegate {
     //TODO replace selectedButton.enabled with isSelected()
     func testIfCurrentlySelectedIsAnswer() -> Bool{
         for view in choiceViews {
-            if view.selectedButton.enabled == true {
+            if view.selected == true {
                 return view.choice!.correctAnswer
             }
         }
         return false
     }
-    
+//
     func getCorrectAnswerText() -> String{
         for view in choiceViews {
             if view.choice.correctAnswer == true {
@@ -205,12 +247,14 @@ class QuestionView : View, QuestionChoiceViewDelegate {
     }
     
     func selectionChange(choiceView : QuestionChoiceView, selected: Bool) {
-        for view in choiceViews{
-            if view.choiceId != choiceView.choiceId {
-                view.selectedButton.enabled = false
-                view.selectedButton.updateUIForSelection()
-            }
-        }
+//        for view in choiceViews{
+//            if view.choiceId != choiceView.choiceId {
+//                view.selectedButton.enabled = false
+//                view.selectedButton.updateUIForSelection()
+//            }
+//        }
+//
+        self.submitAnswer()
     }
     
     //TODO
@@ -230,6 +274,9 @@ class QuestionView : View, QuestionChoiceViewDelegate {
             imageView.animateIn()
         }
         
+        timer.animateIn(time: transitionTime)
+        timer.start(time: 5)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
             completion()
         })
@@ -243,6 +290,11 @@ class QuestionView : View, QuestionChoiceViewDelegate {
         
         questionTextLabel.animateOut()
         submitButton.animateOut()
+        
+        
+        timer.animateOut(time: transitionTime)
+        timer.removeTimer()
+        
         
         if(inputField != nil){
             inputField.animateOut()

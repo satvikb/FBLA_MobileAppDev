@@ -9,7 +9,8 @@
             "imageURL":"",
             "choiceType":"NUM",
             "choices":{},
-            "correctAnswer":"1940"
+            "correctAnswer":"1940",
+            "timeToAnswer":5
         },
         {
             "questionDifficulty": 3,
@@ -18,7 +19,8 @@
             "imageURL":"",
             "choiceType":"TXT",
             "choices":{},
-            "correctAnswer":"Forkner"
+            "correctAnswer":"Forkner",
+            "timeToAnswer":5
         },{
             "questionDifficulty": 3,
             "questionId":"203",
@@ -26,7 +28,8 @@
             "imageURL":"203.jpg",
             "choiceType":"TXT",
             "choices":{},
-            "correctAnswer":"FBLA"
+            "correctAnswer":"FBLA",
+            "timeToAnswer":5
         }
     ]
 }

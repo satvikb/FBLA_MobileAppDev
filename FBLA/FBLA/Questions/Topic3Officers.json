@@ -14,7 +14,8 @@
                 "C":"😎.",
                 "D":"🤬"
             },
-            "correctAnswer":"C"
+            "correctAnswer":"C",
+            "timeToAnswer":5
         },
         {
             "questionDifficulty": 5,
@@ -28,7 +29,8 @@
                 "C":"👏🏻",
                 "D":"🤷🏻‍♀️"
             },
-            "correctAnswer":"D"
+            "correctAnswer":"D",
+            "timeToAnswer":5
         }
     ]
 }

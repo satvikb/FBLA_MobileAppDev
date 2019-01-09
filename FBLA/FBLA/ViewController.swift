@@ -21,17 +21,14 @@ enum ViewType{
 var transitionTime : CGFloat = 0.3
 var allData : AllData!
 
-class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, QuestionHandlerDelegate {
-
+class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, QuestionHandlerDelegate, SettingsViewDelegate {
     
-
-    
-
     var currentView : ViewType!
     
     var menuView : MenuView!
     var playTSV : PlayTSV!
     var questionHandler : QuestionHandler!;
+    var settingsView : SettingsView!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +45,9 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         
         questionHandler = QuestionHandler(frame: self.view.frame)
         questionHandler.delegate = self
+        
+        settingsView = SettingsView(frame: self.view.frame)
+        settingsView.delegate = self
         
         switchBetweenViews(to: .Menu)
     }
@@ -66,6 +66,11 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
             break
         case .QuestionHandler:
             questionHandler.animateOut(completion: {
+                self.questionHandler.removeFromSuperview()
+            })
+            break;
+        case .Settings:
+            settingsView.animateOut(completion: {
                 self.questionHandler.removeFromSuperview()
             })
             break;
@@ -93,6 +98,12 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
 
             })
             break;
+        case .Settings:
+            self.view.addSubview(settingsView)
+            settingsView.animateIn(completion: {
+                
+            })
+            break;
         default:
             break;
         }
@@ -101,6 +112,14 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
 
     func menuPlayButtonPressed() {
         switchBetweenViews(to: .PlayTSV)
+    }
+    
+    func menuLearnButtonPressed() {
+        switchBetweenViews(to: .PlayTSV)
+    }
+    
+    func menuSettingsButtonPressed() {
+        switchBetweenViews(to: .Settings)
     }
 
     func playTSVPlayButtonPressed(selectedTopics: [Topic]) {
@@ -113,6 +132,10 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     
     func questionHandlerHomeButtonPressed() {
         switchBetweenViews(to: .PlayTSV)
+    }
+    
+    func settingsMenuButtonPressed(){
+        switchBetweenViews(to: .Menu)
     }
 }
 
