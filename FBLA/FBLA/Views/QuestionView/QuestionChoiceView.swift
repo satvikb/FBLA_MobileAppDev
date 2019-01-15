@@ -8,9 +8,9 @@
 
 import UIKit
 
+// The view for the individual choice view
 class QuestionChoiceView : UIView {
     
-//    var selectedButton : RadioButton!
     var choiceTextLabel : Label!
     
     var choice : QuestionChoice!
@@ -24,8 +24,9 @@ class QuestionChoiceView : UIView {
     var pressed = {}
     
     var shadowLayer: CAShapeLayer!
-        
-    init(outFrame: CGRect, inFrame: CGRect, choice : QuestionChoice, choiceId : Int, selected : Bool = true) {
+    
+    // Initialize the view with position and question choice information
+    init(outFrame: CGRect, inFrame: CGRect, choice : QuestionChoice, choiceId : Int) {
         self.outFrame = outFrame
         self.inFrame = inFrame
         
@@ -34,26 +35,18 @@ class QuestionChoiceView : UIView {
         self.choice = choice
         self.choiceId = choiceId
         
-        //actually button diameter
-//        let buttonRadius = propToFloat(prop: 0.75, by: self.frame.size.height)
-//        selectedButton = RadioButton(outPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), inPos: propToPoint(prop: CGPoint(x: 0.05, y: 0.25), size: self.frame.size), radius: buttonRadius, text: "", enabled: selected)
-//        selectedButton.pressed = {
-//            self.delegate?.selectionChange(choiceView: self, selected: self.selectedButton.enabled)
-//        }
-//        self.addSubview(selectedButton)
-        
+        // Create the frame for the label
         let initialFrame = propToRect(prop: CGRect(x: 0.05, y: 0, width: 0.85, height: 1), frame: self.frame)
         
+        // Create the label text
         choiceTextLabel = Label(outFrame: initialFrame, inFrame: initialFrame, text: choice.choiceValue, textColor: UIColor.white, valign: .Default, _insets: false)
         choiceTextLabel.adjustsFontSizeToFitWidth = true
         choiceTextLabel.numberOfLines = 10
-//        choiceTextLabel.layer.borderWidth = 3
+        choiceTextLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 30))
         
         self.addSubview(choiceTextLabel)
-        
-//        self.layer.borderColor = UIColor.green.cgColor
-//        self.layer.borderWidth = 3
-        
+
+        // Set the background color for each view
         switch self.choiceId{
         case 0:
             self.backgroundColor = UIColor(red: 0.5, green: 0.75, blue: 0.86, alpha: 1)
@@ -71,15 +64,11 @@ class QuestionChoiceView : UIView {
             self.backgroundColor = UIColor.clear
         }
         
-//        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0.6, alpha: 1)
-        
-        self.layer.borderColor = self.backgroundColor?.darker(by: 20)?.cgColor
-        self.layer.borderWidth = 1
+        // Make the view have rounded corners
         self.layer.cornerRadius = self.frame.size.height/10
-
-       
     }
     
+    // Create the shadow effect for the question choice
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -94,8 +83,7 @@ class QuestionChoiceView : UIView {
             shadowLayer.shadowOpacity = 0.8
             shadowLayer.shadowRadius = 2
             
-//            layer.insertSublayer(shadowLayer, at: 0)
-            layer.insertSublayer(shadowLayer, below: nil) // also works
+            layer.insertSublayer(shadowLayer, below: nil)
         }
     }
     
@@ -107,15 +95,14 @@ class QuestionChoiceView : UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(touchDown){
-//            selectedButton.buttonPressed()
+            // Keep track of a touch down
             selected = true
             touchDown = false
             self.pressed()
-//            self.delegate?.selectionChange(choiceView: self, selected: true)
         }
     }
     
-    
+    // Animation functions
     func animateIn(time: CGFloat = transitionTime) {
         UIView.animate(withDuration: TimeInterval(time), animations: {
             self.frame = self.inFrame

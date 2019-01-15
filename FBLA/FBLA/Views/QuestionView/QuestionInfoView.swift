@@ -8,11 +8,13 @@
 
 import UIKit
 
+// This view is at the top of each question showing the current topic and question number
 class QuestionInfoView : View {
     
     var questionTopicLabel : Label!
     var questionCounterLabel : Label!
     
+    // Initialize the view with relevant data and create UI
     init(frame: CGRect, topicName : String, counterString : String) {
         super.init(frame: frame)
         
@@ -22,7 +24,6 @@ class QuestionInfoView : View {
         questionTopicLabel = Label(outFrame: questionTopicLabelFrameOut, inFrame: questionTopicLabelFrameIn, text: topicName, textColor: UIColor.white, valign: .Default, _insets: false)
         questionTopicLabel.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 25))
         questionTopicLabel.textAlignment = .left
-//        questionTopicLabel.layer.borderWidth = 2
         self.addSubview(questionTopicLabel)
         
         
@@ -39,6 +40,7 @@ class QuestionInfoView : View {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Animation functions
     override func animateIn(completion: @escaping () -> Void) {
         questionTopicLabel.animateIn()
         questionCounterLabel.animateIn()

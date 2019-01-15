@@ -8,9 +8,10 @@
 
 import Foundation
 
+// Define all of the data structures to load data from source .json files
 struct AllData {
-    var topicTotalCount : Int //needed?
-    var questionTotalCount : Int //needed?
+    var topicTotalCount : Int
+    var questionTotalCount : Int
     var topics : [Topic]
 }
 
@@ -40,7 +41,6 @@ struct TopicInfo {
 }
 
 struct QuestionChoice {
-//    var choiceName : String // A, B, C, D, G, E, J, etc.
     var choiceValue : String
     var correctAnswer : Bool
 }

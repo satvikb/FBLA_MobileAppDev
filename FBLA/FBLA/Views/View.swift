@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Helper class for animations
 class View : UIView {
     
     func animateIn(completion: @escaping () -> Void){

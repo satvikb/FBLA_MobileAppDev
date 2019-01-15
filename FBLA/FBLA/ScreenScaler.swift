@@ -8,8 +8,10 @@
 
 import UIKit
 
+// Constant to define a scale
 let DEFAULT_WIDTH : CGFloat = 375
 
+// Helper functions to translate a decimal proportional system to actual screen coordinates. This allows a "one size fits all" approach instead of worrying about multiple screen resolutions
 func propToFloat(prop: CGFloat, by: CGFloat) -> CGFloat {
     return prop * by
 }
@@ -26,7 +28,7 @@ func fontSize(propFontSize : CGFloat) -> CGFloat {
     return propFontSize*(UIScreen.main.bounds.width/DEFAULT_WIDTH)
 }
 
-
+// Extension to use darker and lighter colors for complements
 extension UIColor {
     
     func lighter(by percentage: CGFloat = 30.0) -> UIColor? {

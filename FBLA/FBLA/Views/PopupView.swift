@@ -12,16 +12,18 @@ protocol PopupViewDelegate : class {
     func dismiss()
 }
 
+// Popup view to show text
 class PopupView : View {
     
     weak var delegate : PopupViewDelegate?
     
+    // Animation variables
     var outFrame : CGRect!
     var inFrame : CGRect!
     
+    // UI variables
     var titleLabel : Label!
     var textLabel : UITextView!
-    
     var dismissButton : Button!
     
     init(outFrame: CGRect, inFrame: CGRect, title : String, text : String) {
@@ -30,12 +32,11 @@ class PopupView : View {
         
         super.init(frame: outFrame)
         
+        // Create UI
         let titleLabelFrame = propToRect(prop: CGRect(x: 0.05, y: 0.05, width: 0.9, height: 0.1), frame: self.frame)
-        
         titleLabel = Label(outFrame: titleLabelFrame, inFrame: titleLabelFrame, text: title, textColor: UIColor.black, valign: .Default, _insets: false)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 10
-//        titleLabel.layer.borderWidth = 3
         titleLabel.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 40))
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
@@ -44,12 +45,10 @@ class PopupView : View {
 
         textLabel = UITextView(frame: textLabelFrame)
         textLabel.text = text
-        //        choiceTextLabel.layer.borderWidth = 3
         textLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 22.5))
         textLabel.textAlignment = .center
         textLabel.isEditable = false
         textLabel.returnKeyType = .done
-//        textLabel.layer.borderWidth = 3
 
         self.addSubview(textLabel)
         
@@ -67,6 +66,7 @@ class PopupView : View {
         
     }
     
+    // Animation functions
     override func animateIn(completion: @escaping () -> Void) {
         UIView.animate(withDuration: TimeInterval(transitionTime), animations: {
             self.frame = self.inFrame

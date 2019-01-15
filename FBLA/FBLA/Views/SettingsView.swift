@@ -12,28 +12,30 @@ protocol SettingsViewDelegate : class {
     func settingsMenuButtonPressed()
 }
 
+// This view is the settings view
 class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
     
     weak var delegate: SettingsViewDelegate?
+    
+    // Create UI
     var title : Label!
     var menuButton : Button!
     var resetProgressButton : Button!
     var reportBugButton : Button!
     var creditsButton : Button!
     
-    
+    // Create View variables
     var resetProgressPopupView : PopupView!
     var creditsPopupView : PopupView!
     var reportBugPopupView : PopupView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
+        // Create UI and buttons
         title = Label(outFrame: propToRect(prop: CGRect(x: -0.7, y: 0, width: 0.6, height: 0.15), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.1, y: 0, width: 0.6, height: 0.15), frame: self.frame), text: "Settings", textColor: UIColor.white, valign: .Bottom, _insets: false)
-//        title.text = "Select Topics"
         title.textAlignment = .left
         title.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 70))
-        //        title.layer.borderWidth = 2
         self.addSubview(title)
         
         menuButton = Button(outFrame: propToRect(prop: CGRect(x: -0.5, y: 0, width: 0.5, height: 0.2), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.75, y: 0.05, width: 0.25, height: 0.1), frame: self.frame), text: "", _insets: false, imageURL: "home.png")
@@ -45,6 +47,7 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
         
         resetProgressButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.15, width: 0.5, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.25, width: 0.9, height: 0.1), frame: self.frame), text: "Reset All Progress")
         resetProgressButton.pressed = {
+            // Reset data and show a popup
             DataHandler.resetCompletedQuestions()
             
             self.resetProgressPopupView = PopupView(outFrame: propToRect(prop: CGRect(x: -0.85, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.075, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), title: "Progress Reset", text: "All question progress has been reset.")
@@ -59,8 +62,7 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
         
         reportBugButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.3, width: 0.5, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.4, width: 0.9, height: 0.1), frame: self.frame), text: "Report Bug")
         reportBugButton.pressed = {
-//            let reportBugPlaceholder = "Please describe the bug."
-            
+            // Show a popup to report bug
             self.reportBugPopupView = PopupView(outFrame: propToRect(prop: CGRect(x: -0.85, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.075, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), title: "Report Bug", text: "")
             self.reportBugPopupView.textLabel.isEditable = true
             self.reportBugPopupView.delegate = self
@@ -74,6 +76,8 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
         
         creditsButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.45, width: 0.5, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.55, width: 0.9, height: 0.1), frame: self.frame), text: "Credits")
         creditsButton.pressed = {
+            
+            // Create a popup to show credits
             let creditText = """
             Software development: Satvik Borra
             Images: Jessica Cao, Michael Valenti
@@ -94,6 +98,7 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
         self.addSubview(creditsButton)
     }
     
+    // Dismiss any possible open popups
     func dismiss() {
         if creditsPopupView != nil {
             creditsPopupView.animateOut {
@@ -114,6 +119,7 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
         }
     }
     
+    // For bug reporting, clicking done hides the keyboard instead of creating a new line
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
@@ -127,7 +133,7 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
     }
     
     
-    
+    // Animation functions
     override func animateIn(completion: @escaping () -> Void) {
         title.animateIn()
         menuButton.animateIn()

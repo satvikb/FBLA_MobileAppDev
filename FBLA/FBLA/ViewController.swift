@@ -33,13 +33,17 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        view.backgroundColor = UIColor(red: 28/255, green: 22/255, blue: 77/255, alpha: 1)
+
+        // Set background color
         view.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
 
+        // Read all the data from files
         allData = DataHandler.readData()
 
+        // Initialize the current view as the splash screen
         currentView = .Splash
         
+        //Initialize all of the views and set the delegate to this ViewController
         menuView = MenuView(frame: self.view.frame)
         menuView.delegate = self
         
@@ -52,13 +56,16 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         settingsView = SettingsView(frame: self.view.frame)
         settingsView.delegate = self
         
+        // Start the app by switching to the Main Menu
         switchBetweenViews(to: .Menu)
     }
     
+    // Set light status bar to fit dark theme
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
     
+    // Function to switch between views. Animates out and removes the current view, then adds the next view to the ViewController's view and animates in the view.
     func switchBetweenViews(to: ViewType) {
         switch currentView! {
         case .Menu:
@@ -96,7 +103,7 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
             self.view.addSubview(playTSV)
             self.view.sendSubviewToBack(playTSV)
             playTSV.animateIn(completion: {
-                self.view.bringSubviewToFront(self.playTSV) //TODO without this, playTSV becomes unresponsive
+                self.view.bringSubviewToFront(self.playTSV)
             })
             break
         case .QuestionHandler:
@@ -114,14 +121,12 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         default:
             break
         }
+        // Update the new view
         currentView = to
     }
 
+    // Delegate functions to switch views
     func menuPlayButtonPressed() {
-        switchBetweenViews(to: .PlayTSV)
-    }
-    
-    func menuLearnButtonPressed() {
         switchBetweenViews(to: .PlayTSV)
     }
     
@@ -132,9 +137,8 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     func playTSVHomeButtonPressed() {
         switchBetweenViews(to: .Menu)
     }
-    
+
     func playTSVPlayButtonPressed(selectedTopics: [Topic]) {
-//        questionHandler.topicSet = selectedTopics
         questionHandler.setTopicSet(topics: selectedTopics)
         questionHandler.createQuestionView()
         
@@ -149,6 +153,7 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         switchBetweenViews(to: .Menu)
     }
     
+    // Show the share sheet when pressed. This is called through delegate functions as it requires a ViewController
     func shareButton(text: String){
         let textShare = [ text ]
         let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)

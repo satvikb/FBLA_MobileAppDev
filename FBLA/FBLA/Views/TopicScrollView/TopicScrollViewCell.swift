@@ -38,39 +38,38 @@ class TopicScrollViewCell : UIView {
         }
         self.addSubview(selectedButton)
         
+        // Create all of the appropriate labels
         topicText = Label(outFrame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.2), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.3, y: 0, width: 0.5, height: 1), frame: self.frame))
         topicText.text = topicInfo.topicName
         topicText.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 25))
-//        topicText.layer.borderWidth = 3
         topicText.textAlignment = .center
         self.addSubview(topicText)
         
         selectedText = Label(outFrame: propToRect(prop: CGRect(x: 0, y: 0.75, width: 0.5, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.75, width: 0.5, height: 0.1), frame: self.frame))
         selectedText.text = "Completed"
         selectedText.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 20))
-//        selectedText.layer.borderWidth = 3
         selectedText.textAlignment = .center
         self.addSubview(selectedText)
         
         questionCount = Label(outFrame: propToRect(prop: CGRect(x: 0, y: 0.8, width: 0.5, height: 0.2), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.8, width: 0.5, height: 0.2), frame: self.frame))
         questionCount.text = "\(topicInfo.questionsComplete) / \(topicInfo.topicQuestions)"
+        questionCount.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 20))
         questionCount.textColor = UIColor.black
         questionCount.textAlignment = .center
 
         self.addSubview(questionCount)
         
-        
+        // Create the image view and set the content mode
         topicLogoView = UIImageView(frame: propToRect(prop: CGRect(x: 0.1, y: 0.225, width: 0.8, height: 0.5), frame: self.frame))
-//        topicLogoView.layer.borderWidth = 3
         topicLogoView.image = UIImage(named: topicInfo.logoURL)
         topicLogoView.contentMode = .scaleAspectFit
         self.addSubview(topicLogoView)
         
         self.layer.borderColor = self.backgroundColor?.darker(by: 10)?.cgColor
-//        self.layer.borderWidth = 1
         self.layer.cornerRadius = self.frame.height/10
     }
     
+    // Create the shadow effect for the cell
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -85,8 +84,7 @@ class TopicScrollViewCell : UIView {
             shadowLayer.shadowOpacity = 0.8
             shadowLayer.shadowRadius = 2
             
-            //            layer.insertSublayer(shadowLayer, at: 0)
-//            layer.insertSublayer(shadowLayer, below: nil) // also works
+            layer.insertSublayer(shadowLayer, below: nil)
         }
     }
     

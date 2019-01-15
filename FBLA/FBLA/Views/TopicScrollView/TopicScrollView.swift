@@ -8,11 +8,14 @@
 
 import UIKit
 
+// The topic scroll view is a subview under PlayTSV which displays the 6 possible topics
 class TopicScrollView : UIScrollView {
     
+    // Variables to store topic info and UI elements
     var topicInfo : [TopicInfo]!
     var cells : [TopicScrollViewCell]! = []
     
+    // Variables to store animation & transition information
     var outFrame : CGRect!
     var inFrame : CGRect!
     
@@ -24,6 +27,7 @@ class TopicScrollView : UIScrollView {
         
         super.init(frame: outFrame)
         
+        // Create the topic cells programatically & dynamically using these variables to decide placement
         let topPadding = 0.05
         let leftPadding = 0.025
         let verticalCellPadding = 0.035
@@ -31,14 +35,11 @@ class TopicScrollView : UIScrollView {
         let cellWidth = 0.45
         var cellIndex : Double = 0
         
-        //TODO updateTopicInfo() function to update cell data
         for topic in topicInfo {
+            // Create the view for the current topic
             let cell = TopicScrollViewCell(frame: propToRect(prop: CGRect(x: leftPadding+(Double(Int(cellIndex)%2)*(0.5)), y: topPadding + (cellHeight + verticalCellPadding) * floor(cellIndex/2), width: cellWidth, height: cellHeight), frame: self.frame), topicInfo: topic, selected: true)
             
-            
-            
-            
-            
+            // Set the color of the cell based on the cellIndex
             switch cellIndex {
             case 0:
                 cell.backgroundColor = UIColor(red: 255/255, green: 87/255, blue: 87/255, alpha: 1)
@@ -63,23 +64,19 @@ class TopicScrollView : UIScrollView {
                 break;
             }
             
-
-            
-            
-            
-            
+            // Keep track of the cell and add it to the view
             cells.append(cell)
             self.addSubview(cell)
             cellIndex += 1
         }
         
-        let propHeight = topPadding + ((cellHeight + verticalCellPadding) * (cellIndex/2)) // + cellHeight
+        // Calculate the size of the scroll veiw
+        let propHeight = topPadding + ((cellHeight + verticalCellPadding) * (cellIndex/2))
         let realHeight = propToFloat(prop: CGFloat(propHeight), by: self.frame.height)
         self.contentSize = CGSize(width: self.frame.size.width, height: realHeight)
-        
-//        self.layer.borderWidth = 2
     }
     
+    // Create a list of selected topics
     func getSelectedTopicInfo() -> [TopicInfo]{
         var selectedTopics : [TopicInfo] = []
         for cell in cells {
@@ -94,6 +91,7 @@ class TopicScrollView : UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Animation functions
     func animateIn(time: CGFloat = transitionTime) {
         UIView.animate(withDuration: TimeInterval(time), animations: {
             self.frame = self.inFrame

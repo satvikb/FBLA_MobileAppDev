@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Circular button used in TopicScrollViewCell
 class RadioButton : Button {
     
     var enabled : Bool! = false
@@ -22,7 +23,7 @@ class RadioButton : Button {
         
         let outFrame = CGRect(origin: outPos, size: size)
         let inFrame = CGRect(origin: inPos, size: size)
-        //TODO force box sizes
+
         super.init(outFrame: outFrame, inFrame: inFrame, text: text)
         
         self.outFrame = outFrame
@@ -30,28 +31,16 @@ class RadioButton : Button {
         self.enabled = enabled
         
         self.layer.cornerRadius = self.frame.size.width/2
-        
-//        self.layer.borderWidth = 3
-//        self.layer.borderColor = UIColor.black.cgColor
-        
+
+        // Create checkmark and X path and the shape to display it based on the enabled state
         checkmarkPath = UIBezierPath()
-//        checkmarkPath.move(to: p(0.3, 0.65))
-//        checkmarkPath.addLine(to: p(0.7, 0.3))
-//        checkmarkPath.addLine(to: p(0.5, 0.5))
-//        checkmarkPath.addLine(to: p(0.3, 0.65))
-//        checkmarkPath.addLine(to: p(0.1, 0.55))
-//        checkmarkPath.addLine(to: p(0.7, 0.3))
-//        checkmarkPath.addLine(to: p(0.5, 0.5))
-//        checkmarkPath.addLine(to: p(0.3, 0.65))
         checkmarkPath.move(to: p(0.3, 0.55))
         checkmarkPath.addLine(to: p(0.4, 0.65))
         checkmarkPath.addLine(to: p(0.7, 0.3))
 
-        
         xPath = UIBezierPath()
         xPath.move(to: p(0.3, 0.7))
         xPath.addLine(to: p(0.7, 0.3))
-//        xPath.addLine(to: p(0.5, 0.5))
         xPath.move(to: p(0.3, 0.3))
         xPath.addLine(to: p(0.7, 0.7))
         
@@ -62,9 +51,6 @@ class RadioButton : Button {
         selectionShapeLayer.fillColor = UIColor.clear.cgColor
         selectionShapeLayer.lineWidth = 3
         selectionShapeLayer.lineCap = .square
-//        testLayer.
-//        testLayer.borderWidth = 3
-//        testLayer.borderColor = UIColor.red.cgColor
         self.layer.addSublayer(selectionShapeLayer)
         
         updateUIForSelection()
@@ -77,6 +63,7 @@ class RadioButton : Button {
         return CGPoint(x: propX * self.inFrame.size.width, y: propY * self.inFrame.size.height)
     }
     
+    // Handle button pressing
     override func buttonPressed() {
         enabled = !enabled
         
@@ -84,9 +71,9 @@ class RadioButton : Button {
         
         pressed()
     }
-    
+
+    // Update UI
     func updateUIForSelection(){
-        //TODO animate
         if(enabled){
             selectionShapeLayer.path = checkmarkPath.cgPath
         }else{

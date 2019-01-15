@@ -9,46 +9,50 @@
 import UIKit
 
 protocol QuestionHandlerDelegate : class {
-//    func playTSVPlayButtonPressed(selectedTopics : [Topic])
     func questionHandlerHomeButtonPressed()
     func shareButton(text: String)
     
 }
 
+// This class handles the questions by putting all of the QuestionViews under one manager
 class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate, AllQuestionsCompleteViewDelegate{
-    
-    
     
     weak var delegate : QuestionHandlerDelegate?
     
+    // Keep track of topic
     private var topicSet : [Topic]! = []
     
     var startTotalQuestions : Int = 0
     
+    // Current question information
     var currentTopic : Topic!
     var currentQuestion : Question!
+    
+    // Question views
     var currentQuestionView : QuestionView!
     var currentQuestionInfoView : QuestionInfoView!
-
     var questionFinishedView : QuestionFinishedView!
     var allQuestionsCompleteView : AllQuestionsCompleteView!
     
+    // Score data
     var answerStreak : Int = 0
     var score : Int = 0
+    
     override init(frame: CGRect){
         super.init(frame: frame)
     
+        // Initialize the only static view
         questionFinishedView = QuestionFinishedView(outFrame: propToRect(prop: CGRect(x: 0.05, y: -1, width: 0.9, height: 0.9), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.05, width: 0.9, height: 0.9), frame: self.frame))
         questionFinishedView.delegate = self
-//        self.addSubview(questionFinishedView)
     }
     
+    // Update topic set
     func setTopicSet(topics : [Topic]){
         topicSet = topics
-        
         startTotalQuestions = totalQuestionsRemaining()
     }
     
+    // Create the next question if possible and display it. If no question is available the AllQuestionsCompleteView is shown
     func createQuestionView(){
         if(questionAvailable()){
             currentQuestion = nextQuestion()
@@ -73,6 +77,7 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
         }
     }
     
+    // Called from subviews and handles scores and question set to pass onto the QuestionFinishedView
     func submitButtonPressed(correctAnswer: Bool, scoreReceived: Int, correctAnswerText: String) {
         if(correctAnswer){
             answerStreak += 1
@@ -93,20 +98,24 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
             self.currentQuestionInfoView.removeFromSuperview()
         })
         
+        // Show the next view with updated data
         self.addSubview(questionFinishedView)
         questionFinishedView.updateUI(didAnswerCorrectly: correctAnswer, answerStreak: answerStreak, score: score, scoreChanged: scoreReceived, actualAnswer: correctAnswerText)
         questionFinishedView.animateIn(completion: {})
         self.bringSubviewToFront(questionFinishedView)
         
+        // Reset the answer streak
         if(!correctAnswer){
             answerStreak = 0
         }
     }
     
+    // Function to test if a question is available
     func questionAvailable() -> Bool{
         return totalQuestionsRemaining() > 0
     }
     
+    // Calculate the number of questions remaining based on topic set
     func totalQuestionsRemaining() -> Int{
         var total : Int = 0
         for t in topicSet{
@@ -115,8 +124,9 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
         return total
     }
     
-    //todo
+    // Get the next question
     func nextQuestion() -> Question {
+        // Make sure the topic has unanswered questions
         repeat{
             currentTopic = topicSet.randomElement()!
         }while(currentTopic.questions.count == 0)
@@ -124,17 +134,18 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
         return currentTopic.questions.randomElement()!
     }
     
+    // Delegate function to share score
     func questionFinishedShareButton(text: String) {
         self.delegate?.shareButton(text: text)
     }
     
+    // Delegate functions
     func questionFinishedNextQuestionButton() {
         questionFinishedView.animateOut(completion: {
             self.questionFinishedView.removeFromSuperview()
         })
         
         createQuestionView()
-        
     }
     
     func questionFinishedHomeButton() {

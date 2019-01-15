@@ -81,7 +81,7 @@
         {
             "questionDifficulty": 4,
             "questionId":"106",
-            "question":"Which of these are not in the speech category of events? which of these is not in the speech category of events",
+            "question":"Which of these are not in the speech category of events?",
             "imageURL":"",
             "choiceType":"MC",
             "choices":{

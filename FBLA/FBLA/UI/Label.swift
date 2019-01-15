@@ -16,15 +16,12 @@ enum VAlign {
 
 class Label: UILabel{
     
-//    static let Null = Label(frame: CGRect.zero, text: "")
-    
     var outFrame: CGRect!
     var inFrame: CGRect!
     
     var vAlign: VAlign = .Default
     var insets: Bool = false
     
-    //TODO for Label and Button, _outPos: take into account withinFrame
     init(outFrame: CGRect, inFrame: CGRect, text: String = "", textColor: UIColor = UIColor.black, valign : VAlign = .Default, _insets: Bool = true){
         self.outFrame = outFrame
         self.inFrame = inFrame
@@ -34,14 +31,7 @@ class Label: UILabel{
         super.init(frame: outFrame)
         
         adjustsFontSizeToFitWidth = true
-        
-        //        self.layer.borderColor = UIColor.black.cgColor
-        //        self.layer.borderWidth = 3
-        
-        
-//        self.font = UIFont(name: "Helvetica", size: 20)
-//        self.textAlignment = .center
-        
+
         changeTextColor(color: textColor)
         self.text = text
     }
@@ -50,9 +40,8 @@ class Label: UILabel{
         textColor = color
     }
     
-    
+    // Draw text to support custom insets and vertical alignment
     override func drawText(in r: CGRect) {
-        //        CGFloat height = [self sizeThatFits:rect.size].height
         var rect = r
         
         if(vAlign == .Top){
@@ -67,7 +56,6 @@ class Label: UILabel{
         if(insets == true){
             theInsets = UIEdgeInsets(top: 0, left: r.width*0.1, bottom: 0, right: r.width*0.1)
         }
-//        super.drawText(in: UIEdgeInsetsInsetRect(rect, theInsets))
         super.drawText(in: rect.inset(by: theInsets))
         
     }

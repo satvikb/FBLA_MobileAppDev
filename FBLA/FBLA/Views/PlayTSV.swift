@@ -13,9 +13,11 @@ protocol PlayTSVDelegate : class {
     func playTSVPlayButtonPressed(selectedTopics : [Topic])
 }
 
+// This view shows the topic selection view, TSV is short for Topic Selection View
 class PlayTSV : View{
     
     weak var delegate: PlayTSVDelegate?
+    // UI buttons
     var title : Label!
     var infoLabel : Label!
     var playButton : Button!
@@ -25,12 +27,10 @@ class PlayTSV : View{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
-        
+        // Create UI
         infoLabel = Label(outFrame: propToRect(prop: CGRect(x: -0.8, y: 0.1, width: 0.8, height: 0.075), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.1, width: 0.9, height: 0.0375), frame: self.frame), text: "Questions from unselected topics will not be asked", textColor: UIColor.white, valign: .Bottom, _insets: false)
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 20))
-//                infoLabel.layer.borderWidth = 2
         infoLabel.numberOfLines = 1
         infoLabel.backgroundColor = UIColor.clear
         self.addSubview(infoLabel)
@@ -39,9 +39,9 @@ class PlayTSV : View{
         title.text = "Select Topics"
         title.textAlignment = .center
         title.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 70))
-//                title.layer.borderWidth = 2
         self.addSubview(title)
         
+        // Create buttons
         homeButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.03, width: 0.1, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.025, y: 0.03, width: 0.15, height: 0.08), frame: self.frame), text: "", _insets: false, imageURL: "home.png")
         homeButton.backgroundColor = UIColor.clear
         homeButton.pressed = {
@@ -49,6 +49,7 @@ class PlayTSV : View{
         }
         self.addSubview(homeButton)
         
+        // Create the play button that gathers the question set based on the selected topics
         playButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.85, width: 1, height: 0.15), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.85, width: 1, height: 0.15), frame: self.frame), text: "Play")
         playButton.pressed = {
             
@@ -62,8 +63,7 @@ class PlayTSV : View{
                 for topic in allData.topics {
                     if topic.topicId == info.topicId {
                         var filteredTopic = topic
-                        //remove completed questions
-                        //TODO make this an option
+                        // Remove completed questions
                         for question in filteredTopic.questions {
                             if(completedQuestions.contains(question.questionId)){
                                 if let index:Int = filteredTopic.questions.index(where: {$0.questionId == question.questionId}) {
@@ -76,11 +76,12 @@ class PlayTSV : View{
                     }
                 }
             }
-            
+            // Switch to question view
             self.delegate?.playTSVPlayButtonPressed(selectedTopics: topics)
         }
         self.addSubview(playButton)
         
+        // Create the actual scroll view to display topics
         topicScrollView = TopicScrollView(outFrame: propToRect(prop: CGRect(x: 1, y: 0.15, width: 1, height: 0.7), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.7), frame: self.frame), topics: DataHandler.getTopicInfo())
         self.addSubview(topicScrollView)
         
@@ -90,14 +91,16 @@ class PlayTSV : View{
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Update the scroll view
     func reloadTopicScrollView(){
-        //TODO Better way to do this?
         topicScrollView.removeFromSuperview()
         
         topicScrollView = TopicScrollView(outFrame: propToRect(prop: CGRect(x: 1, y: 0.15, width: 1, height: 0.7), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.7), frame: self.frame), topics: DataHandler.getTopicInfo())
         self.addSubview(topicScrollView)
     }
     
+    
+    // Animation functions
     override func animateIn(completion: @escaping () -> Void) {
         title.animateIn()
         infoLabel.animateIn()

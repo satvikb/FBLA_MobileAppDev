@@ -12,17 +12,18 @@ protocol AllQuestionsCompleteViewDelegate : class {
     func allQuestionsCompleteHomeButton()
 }
 
+// This view is shown when there are no more questions to ask
 class AllQuestionsCompleteView : View {
     
     weak var delegate : AllQuestionsCompleteViewDelegate?
+    
+    // UI variables
     var infoLabel : Label!
-    var resultShape : CAShapeLayer! //TODO
     var answerStreakLabel : Label!
     var actualAnswerLabel : Label!
     
     var scoreLabel : Label!
 
-    //TODO: make these images?
     var nextQuestionButton : Button!
     var homeButton : Button!
     
@@ -39,6 +40,7 @@ class AllQuestionsCompleteView : View {
         self.layer.borderWidth = 3
         self.layer.cornerRadius = self.frame.width/10
         
+        // Create UI labels and button
         let infoLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.1, width: 0.8, height: 0.5), frame: self.frame)
         infoLabel = Label(outFrame: infoLabelFrame, inFrame: infoLabelFrame, text: "All Questions have been answered. Please return to the settings page to reset progress if needed.", textColor: UIColor.white, valign: .Default, _insets: false)
         infoLabel.textAlignment = .center
@@ -60,10 +62,12 @@ class AllQuestionsCompleteView : View {
         self.addSubview(scoreLabel)
     }
     
+    // Show the latest score, called from parent view
     func updateUI(score: Int){
         scoreLabel.text = "Final Score: \(score)"
     }
 
+    // Animation functions
     override func animateIn(completion: @escaping () -> Void) {
         UIView.animate(withDuration: TimeInterval(transitionTime), animations: {
             self.frame = self.inFrame
@@ -83,18 +87,7 @@ class AllQuestionsCompleteView : View {
             completion()
         })
     }
-    //    func animateIn(time: CGFloat = transitionTime) {
-    //        UIView.animate(withDuration: TimeInterval(time), animations: {
-    //            self.frame = self.inFrame
-    //        })
-    //    }
-    //
-    //    func animateOut(time: CGFloat = transitionTime){
-    //        UIView.animate(withDuration: TimeInterval(time), animations: {
-    //            self.frame = self.outFrame
-    //        })
-    //    }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
