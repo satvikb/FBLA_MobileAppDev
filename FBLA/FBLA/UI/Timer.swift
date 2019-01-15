@@ -10,7 +10,7 @@ import UIKit
 
 class CircleTimer : UIView, CAAnimationDelegate{
 
-    static let null = CircleTimer(frame: CGRect.zero, lineWidth: 0);
+    static let null = CircleTimer(frame: CGRect.zero, lineWidth: 0)
     
     var done = {}
     
@@ -19,7 +19,7 @@ class CircleTimer : UIView, CAAnimationDelegate{
     var circle : CAShapeLayer!
     var main : CAShapeLayer!
     init(frame : CGRect, lineWidth : CGFloat){
-        super.init(frame: frame);
+        super.init(frame: frame)
         
         let path = UIBezierPath(arcCenter: CGPoint.zero, radius: frame.size.width/2, startAngle: CGFloat.pi*(3/2), endAngle:  -CGFloat.pi/2, clockwise: false)//UIBezierPath(rect: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)).cgPath
 //        path.fill()
@@ -28,7 +28,7 @@ class CircleTimer : UIView, CAAnimationDelegate{
 //        progressLayer.fillColor = UIColor.red.cgColor
         progressLayer.strokeColor = UIColor.red.cgColor
         
-        progressLayer.lineWidth = 3;
+        progressLayer.lineWidth = 3
         progressLayer.strokeStart = 0
         progressLayer.path = path.cgPath
         progressLayer.strokeEnd = 0
@@ -51,8 +51,8 @@ class CircleTimer : UIView, CAAnimationDelegate{
 
         circle = CAShapeLayer()
         circle.path = UIBezierPath(ovalIn: CGRect(origin: CGPoint.zero, size: frame.size)).cgPath
-        circle.strokeColor = UIColor.red.cgColor;
-        circle.fillColor = UIColor.blue.cgColor;
+        circle.strokeColor = UIColor.red.cgColor
+        circle.fillColor = UIColor.blue.cgColor
         main.mask = circle
         main.mask?.frame = main.bounds
         self.layer.addSublayer(main)
@@ -104,18 +104,18 @@ class CircleTimer : UIView, CAAnimationDelegate{
     }
     
     func getCenterPos(pos : CGPoint) -> CGPoint{
-        return CGPoint(x: pos.x-(frame.size.width/2), y: pos.y-(frame.size.height/2));
+        return CGPoint(x: pos.x-(frame.size.width/2), y: pos.y-(frame.size.height/2))
     }
     
     func animateIn(time : CGFloat){
 //        UIView.animate(withDuration: TimeInterval(time), animations: {
-//            self.frame.origin = self.getCenterPos(pos: self.inPos);
+//            self.frame.origin = self.getCenterPos(pos: self.inPos)
 //        })
         
 //        let fadeIn = CABasicAnimation(keyPath: "opacity")
 //        fadeIn.fromValue = 0
 //        fadeIn.toValue = 1
-//        fadeIn.duration = CFTimeInterval(time);
+//        fadeIn.duration = CFTimeInterval(time)
 //        fadeIn.isRemovedOnCompletion = false
 //        fadeIn.fillMode = kCAFillModeForwards
 //        progressLayer.add(fadeIn, forKey: "fadeIn")
@@ -125,13 +125,13 @@ class CircleTimer : UIView, CAAnimationDelegate{
     
     func animateOut(time : CGFloat){
 //        UIView.animate(withDuration: TimeInterval(time), animations: {
-//            self.frame.origin = self.getCenterPos(pos: self.outPos);
+//            self.frame.origin = self.getCenterPos(pos: self.outPos)
 //        })
         
 //        let fadeOut = CABasicAnimation(keyPath: "opacity")
 //        fadeOut.fromValue = 1
 //        fadeOut.toValue = 0
-//        fadeOut.duration = CFTimeInterval(time);
+//        fadeOut.duration = CFTimeInterval(time)
 //        fadeOut.isRemovedOnCompletion = false
 //        fadeOut.fillMode = kCAFillModeForwards
 //        progressLayer.add(fadeOut, forKey: "fadeOut")

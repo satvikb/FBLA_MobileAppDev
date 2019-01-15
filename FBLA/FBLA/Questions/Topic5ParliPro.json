@@ -1,0 +1,155 @@
+{
+    "topicId": 5,
+    "topicName": "Parliamentary Procedures",
+    "logoURL": "balance.png",
+    "questions":[
+        {
+            "questionDifficulty": 1,
+            "questionId":"501",
+            "question":"If the office of the national FBLA president becomes vacant, the position is filled by the:",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Vice president from the president’s region",
+                "B":"Committee Chair",
+                "C":"The Parliamentarian",
+                "D":"The Secretary"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"502",
+            "question":"Which article in the bylaws identifies the FBLA emblem and colors?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Article XI",
+                "B":"Article X",
+                "C":"Article V",
+                "D":"Article VI"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"503",
+            "question":"The FBLA National President, Secretary, and Treasurer shall be elected by the: ",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"State voting delegates",
+                "B":"The members of each district",
+                "C":"The executive board",
+                "D":"Region vice presidents"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"504",
+            "question":"The classifications of FBLA membership are",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Active, professional, honorary life, national honorary life",
+                "B":"Active, professional, honorary, honorary life",
+                "C":"Active, honorary, national, honorary life",
+                "D":"Active, professional, national life, honorary life"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"505",
+            "question":"The officer who is appointed and not elected is the",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Parliamentarian",
+                "B":"Vice President",
+                "C":"Secretary",
+                "D":"Treasurer"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },{
+            "questionDifficulty": 5,
+            "questionId":"506",
+            "question":"Mass meetings frequently operate with",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"The rules in the standard parliamentary authority",
+                "B":"Mob rule",
+                "C":"Rules of the condensed parliamentary protocol",
+                "D":"Any rules necessary to preserve order"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },{
+            "questionDifficulty": 5,
+            "questionId":"507",
+            "question":"Which motion may be used to open debate a main motion previously adopted?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Rescind",
+                "B":"Privilege Motion",
+                "C":"Adjournment",
+                "D":"Lay on the table"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"508",
+            "question":"The minimum required number of members required to conduct business is",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"7",
+                "B":"8",
+                "C":"9",
+                "D":"10"
+            },
+            "correctAnswer":"C",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"509",
+            "question":"What is the meeting or portion thereof at which proceedings are secret called?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Executive Session",
+                "B":"Top secret meeting",
+                "C":"Classified briefing",
+                "D":"Presidential privilege"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"510",
+            "question":"Bylaw articles are designated by",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Roman numerals",
+                "B":"Top secret meeting",
+                "C":"Classified briefing",
+                "D":"Presidential privilege"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        }
+    ]
+}

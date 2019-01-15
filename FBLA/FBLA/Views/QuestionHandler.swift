@@ -11,6 +11,8 @@ import UIKit
 protocol QuestionHandlerDelegate : class {
 //    func playTSVPlayButtonPressed(selectedTopics : [Topic])
     func questionHandlerHomeButtonPressed()
+    func shareButton(text: String)
+    
 }
 
 class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate, AllQuestionsCompleteViewDelegate{
@@ -24,7 +26,7 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     var startTotalQuestions : Int = 0
     
     var currentTopic : Topic!
-    var currentQuestion : Question!;
+    var currentQuestion : Question!
     var currentQuestionView : QuestionView!
     var currentQuestionInfoView : QuestionInfoView!
 
@@ -32,7 +34,7 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     var allQuestionsCompleteView : AllQuestionsCompleteView!
     
     var answerStreak : Int = 0
-    
+    var score : Int = 0
     override init(frame: CGRect){
         super.init(frame: frame)
     
@@ -57,23 +59,24 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
             self.sendSubviewToBack(currentQuestionView) //to be behind question finished view
             currentQuestionView.animateIn(completion: {})
 
-            currentQuestionInfoView = QuestionInfoView(frame: propToRect(prop: CGRect(x: 0.3, y: 0, width: 0.7, height: 0.15), frame: self.frame), topicName: currentTopic.topicName, counterString: "\((startTotalQuestions - self.totalQuestionsRemaining())+1) / \(self.startTotalQuestions)")
+            currentQuestionInfoView = QuestionInfoView(frame: propToRect(prop: CGRect(x: 0, y: 0, width: 1, height: 0.15), frame: self.frame), topicName: currentTopic.topicName, counterString: "\((startTotalQuestions - self.totalQuestionsRemaining())+1) / \(self.startTotalQuestions)")
             self.addSubview(currentQuestionInfoView)
             self.sendSubviewToBack(currentQuestionInfoView)
             currentQuestionInfoView.animateIn(completion: {})
         }else{
             allQuestionsCompleteView = AllQuestionsCompleteView(outFrame: propToRect(prop: CGRect(x: 1, y: 0.05, width: 0.9, height: 0.9), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.05, width: 0.9, height: 0.9), frame: self.frame))
             allQuestionsCompleteView.delegate = self
+            allQuestionsCompleteView.updateUI(score: score)
             self.addSubview(allQuestionsCompleteView)
             
             allQuestionsCompleteView.animateIn(completion: {})
         }
     }
     
-    func submitButtonPressed(correctAnswer: Bool, correctAnswerText: String) {
+    func submitButtonPressed(correctAnswer: Bool, scoreReceived: Int, correctAnswerText: String) {
         if(correctAnswer){
             answerStreak += 1
-            
+            score += scoreReceived
             DataHandler.completedQuestion(questionId: currentQuestion.questionId)
             
             if let topicIndex:Int = self.topicSet.index(where: {$0.topicId == currentTopic.topicId}) {
@@ -91,7 +94,7 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
         })
         
         self.addSubview(questionFinishedView)
-        questionFinishedView.updateUI(didAnswerCorrectly: correctAnswer, answerStreak: answerStreak, actualAnswer: correctAnswerText)
+        questionFinishedView.updateUI(didAnswerCorrectly: correctAnswer, answerStreak: answerStreak, score: score, scoreChanged: scoreReceived, actualAnswer: correctAnswerText)
         questionFinishedView.animateIn(completion: {})
         self.bringSubviewToFront(questionFinishedView)
         
@@ -121,7 +124,11 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
         return currentTopic.questions.randomElement()!
     }
     
-    func nextQuestionButtonPressed() {
+    func questionFinishedShareButton(text: String) {
+        self.delegate?.shareButton(text: text)
+    }
+    
+    func questionFinishedNextQuestionButton() {
         questionFinishedView.animateOut(completion: {
             self.questionFinishedView.removeFromSuperview()
         })

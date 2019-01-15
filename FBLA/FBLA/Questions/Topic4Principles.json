@@ -1,0 +1,155 @@
+{
+    "topicId": 4,
+    "topicName": "Principles & Procedures",
+    "logoURL": "gavel.png",
+    "questions":[
+        {
+            "questionDifficulty": 1,
+            "questionId":"401",
+            "question":"What are the official colors of FBLA?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Blue and yellow",
+                "B":"Blue and gold",
+                "C":"Navy and yellow",
+                "D":"Navy and gold"
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"402",
+            "question":"How many Middle Level team events are there?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"3",
+                "B":"4",
+                "C":"5",
+                "D":"6"
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"403",
+            "question":"In the absence of the president and VP at a regular meeting, who should call the meeting to order?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Parliamentarian",
+                "B":"Treasurer",
+                "C":"Secretary",
+                "D":"Chapter advisor"
+            },
+            "correctAnswer":"C",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"404",
+            "question":"What is the policy-making body for national FBLA-PBL? ",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"National Business Leaders",
+                "B":"National Board of Parliamentarians",
+                "C":"National FBLA-PBL Committee",
+                "D":"National Board of Directors"
+            },
+            "correctAnswer":"D",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"405",
+            "question":"Which of the following is NOT one of the four divisions of FBLA-PBL?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"FBLA Middle-Level",
+                "B":"FBLA",
+                "C":"Professional Division",
+                "D":"College Division"
+            },
+            "correctAnswer":"D",
+            "timeToAnswer":5
+        },{
+            "questionDifficulty": 5,
+            "questionId":"406",
+            "question":"What is the national publication for FBLA and FBLA Middle-Level advisors called?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Tomorrow’s Business Leader",
+                "B":"Hotline",
+                "C":"Future Business Leader",
+                "D":"Marketplace"
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        },{
+            "questionDifficulty": 5,
+            "questionId":"407",
+            "question":"Excluding the three division presidents, what is the term of office for the National Board of Directors?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"1 year",
+                "B":"3 years",
+                "C":"5 years",
+                "D":"7 years"
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"408",
+            "question":"How many goals are there in FBLA-PBL?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"7",
+                "B":"8",
+                "C":"9",
+                "D":"10"
+            },
+            "correctAnswer":"C",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"409",
+            "question":"How many regions of FBLA-PBL are there?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"4",
+                "B":"5",
+                "C":"6",
+                "D":"7"
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"410",
+            "question":"Who can attend the National Leadership Conference?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Officers of each district chapter",
+                "B":"All members",
+                "C":"Only advisors and officers",
+                "D":"High school members "
+            },
+            "correctAnswer":"B",
+            "timeToAnswer":5
+        }
+    ]
+}

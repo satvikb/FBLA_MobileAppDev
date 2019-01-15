@@ -11,14 +11,14 @@ import UIKit
 class TextField : UITextField{
     
     
-    var outFrame : CGRect!;
-    var inFrame : CGRect!;
+    var outFrame : CGRect!
+    var inFrame : CGRect!
     
     init(outFrame : CGRect, inFrame: CGRect) {
         self.outFrame = outFrame
         self.inFrame = inFrame
         
-        super.init(frame: outFrame);
+        super.init(frame: outFrame)
     }
     
     required init?(coder aDecoder: NSCoder) {

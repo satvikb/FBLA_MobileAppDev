@@ -17,16 +17,21 @@ class QuestionInfoView : View {
         super.init(frame: frame)
         
         let questionTopicLabelFrameOut = propToRect(prop: CGRect(x: 0, y: -1, width: 0.5, height: 1), frame: self.frame)
-        let questionTopicLabelFrameIn = propToRect(prop: CGRect(x: 0, y: 0, width: 0.5, height: 1), frame: self.frame)
+        let questionTopicLabelFrameIn = propToRect(prop: CGRect(x: 0.05, y: 0, width: 0.4, height: 1), frame: self.frame)
 
-        questionTopicLabel = Label(outFrame: questionTopicLabelFrameOut, inFrame: questionTopicLabelFrameIn, text: topicName, textColor: UIColor.black, valign: .Default, _insets: false)
+        questionTopicLabel = Label(outFrame: questionTopicLabelFrameOut, inFrame: questionTopicLabelFrameIn, text: topicName, textColor: UIColor.white, valign: .Default, _insets: false)
+        questionTopicLabel.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 25))
+        questionTopicLabel.textAlignment = .left
+//        questionTopicLabel.layer.borderWidth = 2
         self.addSubview(questionTopicLabel)
         
         
         let questionCounterLabelFrameOut = propToRect(prop: CGRect(x: 0.5, y: -1, width: 0.5, height: 1), frame: self.frame)
-        let questionCounterLabelFrameIn = propToRect(prop: CGRect(x: 0.5, y: 0, width: 0.5, height: 1), frame: self.frame)
+        let questionCounterLabelFrameIn = propToRect(prop: CGRect(x: 0.55, y: 0, width: 0.4, height: 1), frame: self.frame)
         
-        questionCounterLabel = Label(outFrame: questionCounterLabelFrameOut, inFrame: questionCounterLabelFrameIn, text: counterString, textColor: UIColor.black, valign: .Default, _insets: false)
+        questionCounterLabel = Label(outFrame: questionCounterLabelFrameOut, inFrame: questionCounterLabelFrameIn, text: counterString, textColor: UIColor.white, valign: .Default, _insets: false)
+        questionCounterLabel.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 25))
+        questionCounterLabel.textAlignment = .right
         self.addSubview(questionCounterLabel)
     }
     

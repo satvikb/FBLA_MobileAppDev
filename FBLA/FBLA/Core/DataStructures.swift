@@ -17,6 +17,7 @@ struct AllData {
 struct Topic : Codable{
     var topicId : Int
     var topicName : String
+    var logoURL : String
     var questions : [Question]
 }
 
@@ -35,6 +36,7 @@ struct TopicInfo {
     var topicName : String
     var topicQuestions : Int
     var questionsComplete : Int
+    var logoURL : String
 }
 
 struct QuestionChoice {

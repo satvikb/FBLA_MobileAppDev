@@ -27,12 +27,15 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     
     var menuView : MenuView!
     var playTSV : PlayTSV!
-    var questionHandler : QuestionHandler!;
-    var settingsView : SettingsView!;
+    var questionHandler : QuestionHandler!
+    var settingsView : SettingsView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+//        view.backgroundColor = UIColor(red: 28/255, green: 22/255, blue: 77/255, alpha: 1)
+        view.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
+
         allData = DataHandler.readData()
 
         currentView = .Splash
@@ -52,6 +55,10 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         switchBetweenViews(to: .Menu)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
+    
     func switchBetweenViews(to: ViewType) {
         switch currentView! {
         case .Menu:
@@ -68,12 +75,12 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
             questionHandler.animateOut(completion: {
                 self.questionHandler.removeFromSuperview()
             })
-            break;
+            break
         case .Settings:
             settingsView.animateOut(completion: {
                 self.questionHandler.removeFromSuperview()
             })
-            break;
+            break
         default: break
             
         }
@@ -84,28 +91,28 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
             menuView.animateIn(completion: {
 
             })
-            break;
+            break
         case .PlayTSV:
             self.view.addSubview(playTSV)
             self.view.sendSubviewToBack(playTSV)
             playTSV.animateIn(completion: {
                 self.view.bringSubviewToFront(self.playTSV) //TODO without this, playTSV becomes unresponsive
             })
-            break;
+            break
         case .QuestionHandler:
             self.view.addSubview(questionHandler)
             questionHandler.animateIn(completion: {
 
             })
-            break;
+            break
         case .Settings:
             self.view.addSubview(settingsView)
             settingsView.animateIn(completion: {
                 
             })
-            break;
+            break
         default:
-            break;
+            break
         }
         currentView = to
     }
@@ -122,6 +129,10 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
         switchBetweenViews(to: .Settings)
     }
 
+    func playTSVHomeButtonPressed() {
+        switchBetweenViews(to: .Menu)
+    }
+    
     func playTSVPlayButtonPressed(selectedTopics: [Topic]) {
 //        questionHandler.topicSet = selectedTopics
         questionHandler.setTopicSet(topics: selectedTopics)
@@ -136,6 +147,13 @@ class ViewController: UIViewController, MenuViewDelegate, PlayTSVDelegate, Quest
     
     func settingsMenuButtonPressed(){
         switchBetweenViews(to: .Menu)
+    }
+    
+    func shareButton(text: String){
+        let textShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
 

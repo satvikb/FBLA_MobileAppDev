@@ -9,70 +9,133 @@
 import UIKit
 
 protocol QuestionFinishedViewDelegate : class {
-    func nextQuestionButtonPressed()
+    func questionFinishedShareButton(text: String)
+    func questionFinishedNextQuestionButton()
     func questionFinishedHomeButton()
 }
 
 class QuestionFinishedView : View {
  
     weak var delegate : QuestionFinishedViewDelegate?
-    var resultLabel : Label!
-    var resultShape : CAShapeLayer! //TODO
     var answerStreakLabel : Label!
     var actualAnswerLabel : Label!
+    var scoreLabel : Label!
+    var scoreChangeLabel : Label!
     
-    //TODO: make these images?
-    var nextQuestionButton : Button!
     var homeButton : Button!
+    var shareButton : Button!
+    var nextQuestionButton : Button!
     
-    var outFrame : CGRect!;
-    var inFrame : CGRect!;
+    var selectionShapeLayer : CAShapeLayer!
+    var checkmarkPath : UIBezierPath!
+    var xPath : UIBezierPath!
+    
+    var shareText : String = ""
+    
+    var outFrame : CGRect!
+    var inFrame : CGRect!
     
     init(outFrame : CGRect, inFrame: CGRect) {
         self.outFrame = outFrame
         self.inFrame = inFrame
         
-        super.init(frame: outFrame);
+        super.init(frame: outFrame)
         
         self.backgroundColor = UIColor.white
         self.layer.borderWidth = 3
         self.layer.cornerRadius = self.frame.width/10
         
-        let resultLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.1, width: 0.8, height: 0.2), frame: self.frame)
-        resultLabel = Label(outFrame: resultLabelFrame, inFrame: resultLabelFrame, text: "RESULT", textColor: UIColor.black, valign: .Default, _insets: false)
-        resultLabel.textAlignment = .center
-        self.addSubview(resultLabel)
         
-        let answerStreakLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.5, width: 0.8, height: 0.2), frame: self.frame)
-        answerStreakLabel = Label(outFrame: answerStreakLabelFrame, inFrame: answerStreakLabelFrame, text: "Answer Streak", textColor: UIColor.black, valign: .Default, _insets: false)
+        let answerStreakLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.5, width: 0.8, height: 0.1), frame: self.frame)
+        answerStreakLabel = Label(outFrame: answerStreakLabelFrame, inFrame: answerStreakLabelFrame, text: "", textColor: UIColor.white, valign: .Default, _insets: false)
         answerStreakLabel.textAlignment = .center
+        answerStreakLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 23))
         self.addSubview(answerStreakLabel)
         
-        let actualAnswerLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.3, width: 0.8, height: 0.2), frame: self.frame)
-        actualAnswerLabel = Label(outFrame: actualAnswerLabelFrame, inFrame: actualAnswerLabelFrame, text: "{Actual}", textColor: UIColor.black, valign: .Default, _insets: false)
+        let actualAnswerLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0, width: 0.8, height: 0.2), frame: self.frame)
+        actualAnswerLabel = Label(outFrame: actualAnswerLabelFrame, inFrame: actualAnswerLabelFrame, text: "", textColor: UIColor.white, valign: .Default, _insets: false)
         actualAnswerLabel.textAlignment = .center
+        actualAnswerLabel.numberOfLines = 5
+        actualAnswerLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 23))
+
         self.addSubview(actualAnswerLabel)
         
-        let nextQuestionButtonFrame = propToRect(prop: CGRect(x: 0.55, y: 0.7, width: 0.4, height: 0.2), frame: self.frame)
-        nextQuestionButton = Button(outFrame: nextQuestionButtonFrame, inFrame: nextQuestionButtonFrame, text: "Next")
+        let scoreChangeLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.575, width: 0.8, height: 0.15), frame: self.frame)
+        scoreChangeLabel = Label(outFrame: scoreChangeLabelFrame, inFrame: scoreChangeLabelFrame, text: "", textColor: UIColor.white, valign: .Default, _insets: false)
+        scoreChangeLabel.textAlignment = .center
+        scoreChangeLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 40))
+        self.addSubview(scoreChangeLabel)
+        
+        let scoreLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.68, width: 0.8, height: 0.15), frame: self.frame)
+        scoreLabel = Label(outFrame: scoreLabelFrame, inFrame: scoreLabelFrame, text: "{Score}", textColor: UIColor.white, valign: .Default, _insets: false)
+        scoreLabel.textAlignment = .center
+        scoreLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 40))
+        self.addSubview(scoreLabel)
+        
+        let nextQuestionButtonFrame = propToRect(prop: CGRect(x: 0.65, y: 0.85, width: 0.2, height: 0.1), frame: self.frame)
+        nextQuestionButton = Button(outFrame: nextQuestionButtonFrame, inFrame: nextQuestionButtonFrame, text: "", _insets: false, imageURL: "next.png")
+        nextQuestionButton.backgroundColor = UIColor.clear
         nextQuestionButton.pressed = {
-            self.delegate?.nextQuestionButtonPressed()
+            self.delegate?.questionFinishedNextQuestionButton()
         }
         self.addSubview(nextQuestionButton)
         
-        let homeButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.7, width: 0.4, height: 0.2), frame: self.frame)
-        homeButton = Button(outFrame: homeButtonFrame, inFrame: homeButtonFrame, text: "Home")
+        let homeButtonFrame = propToRect(prop: CGRect(x: 0.15, y: 0.85, width: 0.2, height: 0.1), frame: self.frame)
+        homeButton = Button(outFrame: homeButtonFrame, inFrame: homeButtonFrame, text: "", _insets: false, imageURL: "home.png")
+        homeButton.backgroundColor = UIColor.clear
         homeButton.pressed = {
             self.delegate?.questionFinishedHomeButton()
         }
         self.addSubview(homeButton)
+        
+        let shareButtonFrame = propToRect(prop: CGRect(x: 0.4, y: 0.85, width: 0.2, height: 0.1), frame: self.frame)
+        shareButton = Button(outFrame: shareButtonFrame, inFrame: shareButtonFrame, text: "", _insets: false, imageURL: "share.png")
+        shareButton.backgroundColor = UIColor.clear
+        shareButton.pressed = {
+            self.delegate?.questionFinishedShareButton(text: self.shareText)
+        }
+        self.addSubview(shareButton)
+        
+        
+        checkmarkPath = UIBezierPath()
+        checkmarkPath.move(to: p(0.3, 0.35))
+        checkmarkPath.addLine(to: p(0.45, 0.45))
+        checkmarkPath.addLine(to: p(0.7, 0.25))
+        
+        
+        xPath = UIBezierPath()
+        xPath.move(to: p(0.3, 0.45))
+        xPath.addLine(to: p(0.7, 0.25))
+        xPath.move(to: p(0.3, 0.25))
+        xPath.addLine(to: p(0.7, 0.45))
+        
+        selectionShapeLayer = CAShapeLayer()
+        selectionShapeLayer.frame = propToRect(prop: CGRect(x: 0, y: 0, width: 0.4, height: 0.4), frame: self.frame)
+        selectionShapeLayer.path = xPath.cgPath
+        selectionShapeLayer.strokeColor = UIColor.white.cgColor
+        selectionShapeLayer.fillColor = UIColor.clear.cgColor
+        selectionShapeLayer.lineWidth = 10
+        selectionShapeLayer.lineCap = .square
+        self.layer.addSublayer(selectionShapeLayer)
+        
     }
     
-    func updateUI(didAnswerCorrectly : Bool, answerStreak : Int, actualAnswer : String = ""){
+    func p(_ propX: CGFloat, _ propY: CGFloat) -> CGPoint{
+        return CGPoint(x: propX * self.inFrame.size.width, y: propY * self.inFrame.size.height)
+    }
+    
+    func updateUI(didAnswerCorrectly : Bool, answerStreak : Int, score: Int, scoreChanged: Int, actualAnswer : String = ""){
+        shareText = "I got \(score) on BizQuiz! See if you can beat my score!"
+        if(answerStreak > 0){
+            answerStreakLabel.text = didAnswerCorrectly ? "Answer streak: \(answerStreak)" : ""
+        }
+        actualAnswerLabel.text = didAnswerCorrectly ? "" : "Correct Answer: \n \(actualAnswer)"
+        scoreLabel.text = "\(score)"
+        scoreChangeLabel.text = didAnswerCorrectly ? "+\(scoreChanged)" : ""
+        self.backgroundColor = didAnswerCorrectly ? UIColor(red: 38/255, green: 166/255, blue: 91/255, alpha: 1) : UIColor(red: 1, green: 0.412, blue: 0.38, alpha: 1)
         
-        resultLabel.text = didAnswerCorrectly == true ? "CORRECT" : "WRONG"
-        answerStreakLabel.text = "Answer streak: \(answerStreak)"
-        actualAnswerLabel.text = didAnswerCorrectly ? "" : actualAnswer
+        selectionShapeLayer.path = didAnswerCorrectly ? checkmarkPath.cgPath : xPath.cgPath
+
     }
     
     override func animateIn(completion: @escaping () -> Void) {
@@ -94,17 +157,6 @@ class QuestionFinishedView : View {
             completion()
         })
     }
-//    func animateIn(time: CGFloat = transitionTime) {
-//        UIView.animate(withDuration: TimeInterval(time), animations: {
-//            self.frame = self.inFrame
-//        })
-//    }
-//    
-//    func animateOut(time: CGFloat = transitionTime){
-//        UIView.animate(withDuration: TimeInterval(time), animations: {
-//            self.frame = self.outFrame
-//        })
-//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

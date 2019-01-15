@@ -15,8 +15,10 @@ class RadioButton : Button {
     var checkmarkPath : UIBezierPath!
     var xPath : UIBezierPath!
 
+    var selectionShapeLayer : CAShapeLayer!
+    
     init(outPos: CGPoint, inPos: CGPoint, radius : CGFloat, text: String, enabled : Bool = false) {
-        let size = CGSize(width: radius, height: radius)
+        let size = CGSize(width: radius*2, height: radius*2)
         
         let outFrame = CGRect(origin: outPos, size: size)
         let inFrame = CGRect(origin: inPos, size: size)
@@ -31,8 +33,6 @@ class RadioButton : Button {
         
 //        self.layer.borderWidth = 3
 //        self.layer.borderColor = UIColor.black.cgColor
-        updateUIForSelection()
-        
         
         checkmarkPath = UIBezierPath()
 //        checkmarkPath.move(to: p(0.3, 0.65))
@@ -43,32 +43,34 @@ class RadioButton : Button {
 //        checkmarkPath.addLine(to: p(0.7, 0.3))
 //        checkmarkPath.addLine(to: p(0.5, 0.5))
 //        checkmarkPath.addLine(to: p(0.3, 0.65))
-        checkmarkPath.move(to: p(0.1, 0.55))
-        checkmarkPath.addLine(to: p(0.3, 0.65))
-        checkmarkPath.addLine(to: p(0.5, 0.5))
+        checkmarkPath.move(to: p(0.3, 0.55))
+        checkmarkPath.addLine(to: p(0.4, 0.65))
         checkmarkPath.addLine(to: p(0.7, 0.3))
 
         
         xPath = UIBezierPath()
-        xPath.move(to: p(0.2, 0.7))
+        xPath.move(to: p(0.3, 0.7))
         xPath.addLine(to: p(0.7, 0.3))
 //        xPath.addLine(to: p(0.5, 0.5))
-        xPath.move(to: p(0.2, 0.3))
+        xPath.move(to: p(0.3, 0.3))
         xPath.addLine(to: p(0.7, 0.7))
         
-        let testLayer = CAShapeLayer()
-        testLayer.frame = CGRect(origin: CGPoint.zero, size: self.inFrame.size)
-        testLayer.path = xPath.cgPath
-        testLayer.strokeColor = UIColor.white.cgColor
-        testLayer.fillColor = UIColor.clear.cgColor
-        testLayer.lineWidth = 3
-        testLayer.lineCap = .square
+        selectionShapeLayer = CAShapeLayer()
+        selectionShapeLayer.frame = CGRect(origin: CGPoint.zero, size: self.inFrame.size)
+        selectionShapeLayer.path = xPath.cgPath
+        selectionShapeLayer.strokeColor = UIColor.black.cgColor
+        selectionShapeLayer.fillColor = UIColor.clear.cgColor
+        selectionShapeLayer.lineWidth = 3
+        selectionShapeLayer.lineCap = .square
 //        testLayer.
 //        testLayer.borderWidth = 3
 //        testLayer.borderColor = UIColor.red.cgColor
-        self.layer.addSublayer(testLayer)
+        self.layer.addSublayer(selectionShapeLayer)
         
+        updateUIForSelection()
         
+        self.layer.borderWidth = 2
+        self.layer.backgroundColor = UIColor.clear.cgColor
     }
     
     func p(_ propX: CGFloat, _ propY: CGFloat) -> CGPoint{
@@ -86,9 +88,9 @@ class RadioButton : Button {
     func updateUIForSelection(){
         //TODO animate
         if(enabled){
-            self.layer.backgroundColor = UIColor.green.cgColor
+            selectionShapeLayer.path = checkmarkPath.cgPath
         }else{
-            self.layer.backgroundColor = UIColor.red.cgColor
+            selectionShapeLayer.path = UIBezierPath().cgPath
         }
     }
     

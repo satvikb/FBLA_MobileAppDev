@@ -20,35 +20,48 @@ class AllQuestionsCompleteView : View {
     var answerStreakLabel : Label!
     var actualAnswerLabel : Label!
     
+    var scoreLabel : Label!
+
     //TODO: make these images?
     var nextQuestionButton : Button!
     var homeButton : Button!
     
-    var outFrame : CGRect!;
-    var inFrame : CGRect!;
+    var outFrame : CGRect!
+    var inFrame : CGRect!
     
     init(outFrame : CGRect, inFrame: CGRect) {
         self.outFrame = outFrame
         self.inFrame = inFrame
         
-        super.init(frame: outFrame);
+        super.init(frame: outFrame)
         
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
         self.layer.borderWidth = 3
         self.layer.cornerRadius = self.frame.width/10
         
         let infoLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.1, width: 0.8, height: 0.5), frame: self.frame)
-        infoLabel = Label(outFrame: infoLabelFrame, inFrame: infoLabelFrame, text: "All Questions have been answered. Please return to the menu to start again.", textColor: UIColor.black, valign: .Default, _insets: false)
+        infoLabel = Label(outFrame: infoLabelFrame, inFrame: infoLabelFrame, text: "All Questions have been answered. Please return to the settings page to reset progress if needed.", textColor: UIColor.white, valign: .Default, _insets: false)
         infoLabel.textAlignment = .center
         infoLabel.numberOfLines = 3
         self.addSubview(infoLabel)
 
         let homeButtonFrame = propToRect(prop: CGRect(x: 0.05, y: 0.7, width: 0.9, height: 0.2), frame: self.frame)
-        homeButton = Button(outFrame: homeButtonFrame, inFrame: homeButtonFrame, text: "Home")
+        homeButton = Button(outFrame: homeButtonFrame, inFrame: homeButtonFrame, text: "", _insets: false, imageURL: "home.png")
         homeButton.pressed = {
             self.delegate?.allQuestionsCompleteHomeButton()
         }
+        homeButton.backgroundColor = UIColor.clear
         self.addSubview(homeButton)
+        
+        let scoreLabelFrame = propToRect(prop: CGRect(x: 0.1, y: 0.5, width: 0.8, height: 0.15), frame: self.frame)
+        scoreLabel = Label(outFrame: scoreLabelFrame, inFrame: scoreLabelFrame, text: "", textColor: UIColor.white, valign: .Default, _insets: false)
+        scoreLabel.textAlignment = .center
+        scoreLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 40))
+        self.addSubview(scoreLabel)
+    }
+    
+    func updateUI(score: Int){
+        scoreLabel.text = "Final Score: \(score)"
     }
 
     override func animateIn(completion: @escaping () -> Void) {

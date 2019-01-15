@@ -1,0 +1,157 @@
+{
+    "topicId": 6,
+    "topicName": "Ethics/Business Skills",
+    "logoURL": "handshake.png",
+    "questions":[
+        {
+            "questionDifficulty": 5,
+            "questionId":"601",
+            "question":"This is a methodical review of a condition, situation, or the accounting practices of a company made by a CPA",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"An Audit",
+                "B":"A check",
+                "C":"An inspection",
+                "D":"A look over"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"602",
+            "question":"Which of these is not a type of ethical issue in the workplace?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Constructive criticism",
+                "B":"Diversity",
+                "C":"Decision making",
+                "D":"Compliance and governance"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"603",
+            "question":"Which of these might be inappropriate to stress an idea in a formal letter?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"All capital letters",
+                "B":"Bold",
+                "C":"Underline",
+                "D":"Italics"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"604",
+            "question":"Which of the following is NOT an effective characteristic of communication?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Sarcasm",
+                "B":"Eye Contact",
+                "C":"Body Language",
+                "D":"Voice projection"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"605",
+            "question":"Which of the following is NOT one of the 3 levels of ethical issues that can occur in the business place?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Collaborative",
+                "B":"Individual",
+                "C":"Organizational",
+                "D":"Societal"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"606",
+            "question":"What is the appropriate frequency of external communication?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Less frequently than internal communication",
+                "B":"More frequently than internal communication",
+                "C":"As frequently as internal communication",
+                "D":"As desired"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"607",
+            "question":"What does OSHA stand for?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Occupational Safety and Health Administration",
+                "B":"Occupational Safety and Health Association",
+                "C":"Organizational Supervision of Health Administration",
+                "D":"Organizational Supervision of Health Association"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"608",
+            "question":"What is one of the 5 C’s to communication?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Clear",
+                "B":"Cooperative",
+                "C":"Comprehensive",
+                "D":"Courteous"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"609",
+            "question":"Which of the following is NOT one of the four basic marketing strategies?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Packaging",
+                "B":"Product",
+                "C":"Place",
+                "D":"Promotion"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        },
+        {
+            "questionDifficulty": 5,
+            "questionId":"610",
+            "question":"What form describes the goods/services sold, along with their quantities and prices?",
+            "imageURL":"",
+            "choiceType":"MC",
+            "choices":{
+                "A":"Invoice",
+                "B":"Memo",
+                "C":"Warranty",
+                "D":"Receipt"
+            },
+            "correctAnswer":"A",
+            "timeToAnswer":5
+        }
+    ]
+}

@@ -21,22 +21,22 @@ class Label: UILabel{
     var outFrame: CGRect!
     var inFrame: CGRect!
     
-    var vAlign: VAlign = .Default;
-    var insets: Bool = false;
+    var vAlign: VAlign = .Default
+    var insets: Bool = false
     
     //TODO for Label and Button, _outPos: take into account withinFrame
     init(outFrame: CGRect, inFrame: CGRect, text: String = "", textColor: UIColor = UIColor.black, valign : VAlign = .Default, _insets: Bool = true){
         self.outFrame = outFrame
         self.inFrame = inFrame
-        vAlign = valign;
-        insets = _insets;
+        vAlign = valign
+        insets = _insets
         
         super.init(frame: outFrame)
         
         adjustsFontSizeToFitWidth = true
         
-        //        self.layer.borderColor = UIColor.black.cgColor;
-        //        self.layer.borderWidth = 3;
+        //        self.layer.borderColor = UIColor.black.cgColor
+        //        self.layer.borderWidth = 3
         
         
 //        self.font = UIFont(name: "Helvetica", size: 20)
@@ -52,15 +52,15 @@ class Label: UILabel{
     
     
     override func drawText(in r: CGRect) {
-        //        CGFloat height = [self sizeThatFits:rect.size].height;
-        var rect = r;
+        //        CGFloat height = [self sizeThatFits:rect.size].height
+        var rect = r
         
         if(vAlign == .Top){
             rect.size.height = self.sizeThatFits(rect.size).height
         }else if(vAlign == .Bottom){
             let height = self.sizeThatFits(rect.size).height
-            rect.origin.y += rect.size.height - height;
-            rect.size.height = height;
+            rect.origin.y += rect.size.height - height
+            rect.size.height = height
         }
         
         var theInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

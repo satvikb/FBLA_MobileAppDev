@@ -15,7 +15,7 @@ class DataHandler {
     static func readData() -> AllData {
         
         var topics : [Topic] = []
-        var questionCount : Int = 0;
+        var questionCount : Int = 0
         
         let filePath = Bundle.main.resourcePath!
 
@@ -72,7 +72,7 @@ class DataHandler {
         var allTopicInfo : [TopicInfo] = []
         
         for topic in allData.topics {
-            let topicInfo = TopicInfo(topicId: topic.topicId, topicName: topic.topicName, topicQuestions: topic.questions.count, questionsComplete: getQuestionsCompleteFromTopic(topic: topic))
+            let topicInfo = TopicInfo(topicId: topic.topicId, topicName: topic.topicName, topicQuestions: topic.questions.count, questionsComplete: getQuestionsCompleteFromTopic(topic: topic), logoURL: topic.logoURL)
             allTopicInfo.append(topicInfo)
         }
         

@@ -9,6 +9,7 @@
 import UIKit
 
 protocol PlayTSVDelegate : class {
+    func playTSVHomeButtonPressed()
     func playTSVPlayButtonPressed(selectedTopics : [Topic])
 }
 
@@ -16,21 +17,40 @@ class PlayTSV : View{
     
     weak var delegate: PlayTSVDelegate?
     var title : Label!
-    var button : Button!
-    var topicScrollView : TopicScrollView!;
+    var infoLabel : Label!
+    var playButton : Button!
+    var homeButton : Button!
+    var topicScrollView : TopicScrollView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        title = Label(outFrame: propToRect(prop: CGRect(x: -0.7, y: 0, width: 0.6, height: 0.15), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.2, y: 0, width: 0.6, height: 0.15), frame: self.frame), text: "Select Topics", textColor: UIColor.black, valign: .Bottom, _insets: false)
-        title.text = "Select Topics";
-        title.textAlignment = .left
+        
+        
+        infoLabel = Label(outFrame: propToRect(prop: CGRect(x: -0.8, y: 0.1, width: 0.8, height: 0.075), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.05, y: 0.1, width: 0.9, height: 0.0375), frame: self.frame), text: "Questions from unselected topics will not be asked", textColor: UIColor.white, valign: .Bottom, _insets: false)
+        infoLabel.textAlignment = .center
+        infoLabel.font = UIFont(name: "SFProText-Light", size: fontSize(propFontSize: 20))
+//                infoLabel.layer.borderWidth = 2
+        infoLabel.numberOfLines = 1
+        infoLabel.backgroundColor = UIColor.clear
+        self.addSubview(infoLabel)
+        
+        title = Label(outFrame: propToRect(prop: CGRect(x: -0.8, y: 0.03, width: 0.8, height: 0.07), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.2, y: 0.005, width: 0.8, height: 0.0925), frame: self.frame), text: "Select Topics", textColor: UIColor.white, valign: .Default, _insets: false)
+        title.text = "Select Topics"
+        title.textAlignment = .center
         title.font = UIFont(name: "SFProText-Heavy", size: fontSize(propFontSize: 70))
-//        title.layer.borderWidth = 2
+//                title.layer.borderWidth = 2
         self.addSubview(title)
         
-        button = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.85, width: 1, height: 0.15), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.85, width: 1, height: 0.15), frame: self.frame), text: "play")
-        button.pressed = {
+        homeButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.03, width: 0.1, height: 0.1), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.025, y: 0.03, width: 0.15, height: 0.08), frame: self.frame), text: "", _insets: false, imageURL: "home.png")
+        homeButton.backgroundColor = UIColor.clear
+        homeButton.pressed = {
+            self.delegate?.playTSVHomeButtonPressed()
+        }
+        self.addSubview(homeButton)
+        
+        playButton = Button(outFrame: propToRect(prop: CGRect(x: -1, y: 0.85, width: 1, height: 0.15), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.85, width: 1, height: 0.15), frame: self.frame), text: "Play")
+        playButton.pressed = {
             
             //get selected topics
             var topics : [Topic] = []
@@ -59,7 +79,7 @@ class PlayTSV : View{
             
             self.delegate?.playTSVPlayButtonPressed(selectedTopics: topics)
         }
-        self.addSubview(button)
+        self.addSubview(playButton)
         
         topicScrollView = TopicScrollView(outFrame: propToRect(prop: CGRect(x: 1, y: 0.15, width: 1, height: 0.7), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0, y: 0.15, width: 1, height: 0.7), frame: self.frame), topics: DataHandler.getTopicInfo())
         self.addSubview(topicScrollView)
@@ -80,7 +100,10 @@ class PlayTSV : View{
     
     override func animateIn(completion: @escaping () -> Void) {
         title.animateIn()
-        button.animateIn()
+        infoLabel.animateIn()
+        
+        playButton.animateIn()
+        homeButton.animateIn()
         
         reloadTopicScrollView()
         topicScrollView.animateIn()
@@ -92,7 +115,11 @@ class PlayTSV : View{
     
     override func animateOut(completion: @escaping () -> Void) {
         title.animateOut()
-        button.animateOut()
+        infoLabel.animateOut()
+        
+        playButton.animateOut()
+        homeButton.animateOut()
+        
         topicScrollView.animateOut()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(transitionTime), execute: {
