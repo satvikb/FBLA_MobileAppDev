@@ -149,6 +149,8 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     }
     
     func questionFinishedHomeButton() {
+        score = 0
+        answerStreak = 0
         questionFinishedView.animateOut(completion: {
             self.questionFinishedView.removeFromSuperview()
         })
@@ -156,6 +158,8 @@ class QuestionHandler : View, QuestionViewDelegate, QuestionFinishedViewDelegate
     }
     
     func allQuestionsCompleteHomeButton() {
+        score = 0
+        answerStreak = 0
         allQuestionsCompleteView.animateOut(completion: {
             self.allQuestionsCompleteView.removeFromSuperview()
         })

@@ -13,7 +13,6 @@
 		402717DA215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 402717D8215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf */; };
 		402717DC215EE01B00C886F8 /* QuestionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717DB215EE01B00C886F8 /* QuestionHandler.swift */; };
 		402717DE215EE95B00C886F8 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717DD215EE95B00C886F8 /* QuestionView.swift */; };
-		402717E1215EEDB300C886F8 /* 203.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 402717E0215EEDB300C886F8 /* 203.jpg */; };
 		402717E4215EF2B900C886F8 /* QuestionChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717E3215EF2B900C886F8 /* QuestionChoiceView.swift */; };
 		402717E6216071FE00C886F8 /* QuestionFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402717E5216071FE00C886F8 /* QuestionFinishedView.swift */; };
 		402AAFD4215DBA8000BF8815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402AAFD3215DBA8000BF8815 /* AppDelegate.swift */; };
@@ -34,7 +33,6 @@
 		40CC0A02215DD84200AC9A38 /* Topic2History.json in Resources */ = {isa = PBXBuildFile; fileRef = 40CC0A01215DD84200AC9A38 /* Topic2History.json */; };
 		40CE01E32162B43C008FC24F /* AllQuestionsCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE01E22162B43C008FC24F /* AllQuestionsCompleteView.swift */; };
 		40CE01EA2162E69D008FC24F /* Topic3Officers.json in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01E92162E69D008FC24F /* Topic3Officers.json */; };
-		40CE01EC2162E700008FC24F /* 301.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 40CE01EB2162E700008FC24F /* 301.jpg */; };
 		40CE01EE2162EE7C008FC24F /* QuestionInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE01ED2162EE7C008FC24F /* QuestionInfoView.swift */; };
 		40EB712221E2A7EE0047FCCD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EB712121E2A7EE0047FCCD /* SettingsView.swift */; };
 		40EB712621EC08430047FCCD /* Topic4Principles.json in Resources */ = {isa = PBXBuildFile; fileRef = 40EB712521EC08430047FCCD /* Topic4Principles.json */; };
@@ -61,7 +59,6 @@
 		402717D8215EDADA00C886F8 /* SF-Pro-Text-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Heavy.otf"; sourceTree = "<group>"; };
 		402717DB215EE01B00C886F8 /* QuestionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionHandler.swift; sourceTree = "<group>"; };
 		402717DD215EE95B00C886F8 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
-		402717E0215EEDB300C886F8 /* 203.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 203.jpg; sourceTree = "<group>"; };
 		402717E3215EF2B900C886F8 /* QuestionChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionChoiceView.swift; sourceTree = "<group>"; };
 		402717E5216071FE00C886F8 /* QuestionFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFinishedView.swift; sourceTree = "<group>"; };
 		402AAFD0215DBA7F00BF8815 /* FBLA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBLA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +81,6 @@
 		40CC0A01215DD84200AC9A38 /* Topic2History.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Topic2History.json; sourceTree = "<group>"; };
 		40CE01E22162B43C008FC24F /* AllQuestionsCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuestionsCompleteView.swift; sourceTree = "<group>"; };
 		40CE01E92162E69D008FC24F /* Topic3Officers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Topic3Officers.json; sourceTree = "<group>"; };
-		40CE01EB2162E700008FC24F /* 301.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 301.jpg; sourceTree = "<group>"; };
 		40CE01ED2162EE7C008FC24F /* QuestionInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionInfoView.swift; sourceTree = "<group>"; };
 		40EB712121E2A7EE0047FCCD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		40EB712521EC08430047FCCD /* Topic4Principles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Topic4Principles.json; sourceTree = "<group>"; };
@@ -128,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				40EB713B21ED51C70047FCCD /* titleLogo.png */,
-				402717E0215EEDB300C886F8 /* 203.jpg */,
-				40CE01EB2162E700008FC24F /* 301.jpg */,
 				40EB712C21EC2C000047FCCD /* balance.png */,
 				40EB712821EC2C000047FCCD /* bow.png */,
 				40EB712921EC2C000047FCCD /* gavel.png */,
@@ -314,9 +308,7 @@
 				40CE01EA2162E69D008FC24F /* Topic3Officers.json in Resources */,
 				40EB713121EC2C000047FCCD /* trophy.png in Resources */,
 				40EB712621EC08430047FCCD /* Topic4Principles.json in Resources */,
-				402717E1215EEDB300C886F8 /* 203.jpg in Resources */,
 				40EB714121ED69090047FCCD /* gear.png in Resources */,
-				40CE01EC2162E700008FC24F /* 301.jpg in Resources */,
 				402AAFDE215DBA8200BF8815 /* LaunchScreen.storyboard in Resources */,
 				402AAFDB215DBA8200BF8815 /* Assets.xcassets in Resources */,
 				402717D9215EDADA00C886F8 /* SF-Pro-Text-Light.otf in Resources */,
@@ -509,6 +501,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U8UQSCUMG7;
 				INFOPLIST_FILE = "FBLA/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,6 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U8UQSCUMG7;
 				INFOPLIST_FILE = "FBLA/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

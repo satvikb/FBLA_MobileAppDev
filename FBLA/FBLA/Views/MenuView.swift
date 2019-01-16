@@ -74,7 +74,7 @@ class MenuView : View, PopupViewDelegate{
     
     // Function to show the instructions view
     func showInstructionsView(){
-        let instructionsText = "Welcome to BizQuiz! Here you will be able to test your knowledge of FBLA topics. Start by clicking play and choosing the topics you would like to be tested on. Once you answer each question, you will be shown whether or not you got it right. Then you can either go to the main menu or continue on to the next question. Each question has a time limit, so be quick! The faster you answer, the more points you will receive. If you would like to share your score, press the “Share” button at the bottom of the screen after each question. Have fun!"
+        let instructionsText = "Welcome to BizQuiz! Here you will be able to test your knowledge of FBLA topics. Start by clicking play and choosing the topics you would like to be tested on. Be sure to scroll down to see all the topics! Once you answer each question, you will be shown whether or not you got it right. Then you can either go to the main menu or continue on to the next question. Each question has a time limit, so be quick! The faster you answer, the more points you will receive. If you would like to share your score on various social media, press the “Share” button at the bottom of the screen after each question. Have fun!"
         
         // Create and show the instructions view
         instructionsPopupView = PopupView(outFrame: propToRect(prop: CGRect(x: -0.85, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.075, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), title: "Instructions", text: instructionsText)

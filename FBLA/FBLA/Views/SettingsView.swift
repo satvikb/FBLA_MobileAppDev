@@ -85,6 +85,9 @@ class SettingsView : View, PopupViewDelegate, UITextViewDelegate{
 
             Question Content: fbla-pbl.org
             Program Used: Xcode
+
+            All images and designs seen in this app were created specifically for this app.
+            All fonts used are licenced under use only for Apple applications.
             """
             
             self.creditsPopupView = PopupView(outFrame: propToRect(prop: CGRect(x: -0.85, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), inFrame: propToRect(prop: CGRect(x: 0.075, y: 0.075, width: 0.85, height: 0.85), frame: self.frame), title: "Credits", text: creditText)

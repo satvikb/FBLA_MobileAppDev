@@ -1,0 +1,5 @@
+Loading an iOS app file (.ipa) is no longer supposed with iTunes and therefore the app must be run through the Xcode IDE.
+
+To run the app, a Mac with Xcode installed is required to run on an iOS device. First open the .xcodeproj file located in the FBLA/ folder in the same directory as this file. To run on a physical device, a developer account, appropriate provisioning profiles, and a development device is required. Plug the physical device into the computer with an iTunes cable and click Product in the menu bar, then Run to install the app on the physical device. 
+
+If running on a physical device is not possible, running on an iOS simulator digitally is possible without the above requirements, but some functions such as social media integration are not supported. Click a simulator from the list of devices next to the app name at the top left of Xcode and Run the app. If no simulators are shown, install a simulator for the device of your choice and run the app once installed.
